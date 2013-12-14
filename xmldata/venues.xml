@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<venues>
+    <venue>
+        <id>4001</id>
+        <name>Lancaster Church of the Brethren</name>
+        <description/>
+        <address>
+            <street>1601 Sunset Ave.</street>
+            <box/>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode/>
+        </address>
+        <phone>717-397-4751</phone>
+        <website>http://www.lancob.org/</website>
+        <seatingchart/>
+        <parkinginfo/>
+        <accessibilityinfo/>
+        <images>
+            <image>http://lancob.org/site/wp-content/uploads/2011/12/HomePage_Banner1-copy.jpg</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4002</id>
+        <name>First Presbyterian Church</name>
+        <description/>
+        <address>
+            <street>140 E. Orange St.</street>
+            <box/>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode/>
+        </address>
+        <phone>717-394-6854</phone>
+        <website>http://www.fpclive.org/</website>
+        <seatingchart/>
+        <parkinginfo/>
+        <accessibilityinfo/>
+        <images>
+            <image/>
+        </images>
+    </venue>
+    <venue>
+        <id>4003</id>
+        <name>Ware Center</name>
+        <description>
+            Lancaster's new visual and performing arts center located in the heart of the arts and historic district! There is something for everyone in Lancaster, and The Ware Center of Millersville University Lancaster captures a little of everything. From art to cabaret to music, we have an event series or two that you will love! Stunning new, architecturally important facility with a two-story, glass enclosed lobby space, acoustically-perfect performance space with stadium seating and Ville in the Sky -- a music cafe overlooking the city of Lancaster.
+        </description>
+        <address>
+            <street>42 N. Prince Street</street>
+            <box/>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17603</zipcode>
+        </address>
+        <phone>717-871-2308</phone>
+        <website>http://www.millersville.edu/muarts/venues/ware-center</website>
+        <email>warecenterinfo@millersville.edu</email>
+        <seatingchart/>
+        <parkinginfo/>
+        <accessibilityinfo/>
+        <images>
+            <image>http://www.lancasterarts.com/Uploads/images/LancasterARTS/Sponsors-website/WareCentr408w.jpg</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4004</id>
+        <name>Long's Park</name>
+        <description>
+            Long’s Park is a 80-acre park located northwest of Lancaster City at the intersection of Harrisburg Pike and the Route 30 Bypass. Picnic pavilions and tables dot the park along with a petting farm, children's playgrounds, a two-acre, spring-fed lake, tennis courts and a fitness trail.
+        </description>
+        <address>
+            <street>1441 Harrisburg Pike</street>
+            <box/>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17601</zipcode>
+        </address>
+        <phone>717-735-8883</phone>
+        <website>http://www.longspark.org/</website>
+        <email>info@longspark.org</email>
+        <seatingchart/>
+        <parkinginfo/>
+        <accessibilityinfo/>
+        <images>
+            <image>http://allegrochamberorchestra.org/wp/wp-content/uploads/2013/04/Longs-Park-with-crowd-300x205.jpg</image>
+            <image>http://www.longspark.org/IMAGES/2013musichomepage01.jpg</image>
+            <image>http://www.longspark.org/IMAGES/2006-LP-gazebo.jpg</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4005</id>
+        <name>Barshinger Center</name>
+        <description>
+            The Barshinger Center provides a world-class, 500-seat concert hall to serve as the centerpiece of Franklin and Marshall's thriving music program.
+        </description>
+        <address>
+            <street>615 College Avenue</street>
+            <box/>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode/>
+        </address>
+        <phone>717-735-8883</phone>
+        <website>http://www.fandm.edu/directory/building/259</website>
+        <seatingchart>
+            http://www.fandm.edu/uploads/media_items/barshinger-seatingchart.475.657.s.jpg
+        </seatingchart>
+        <parkinginfo/>
+        <accessibilityinfo/>
+        <images>
+            <image>http://allegrochamberorchestra.org/wp/wp-content/uploads/2013/04/barshinger-outside.jpg</image>
+            <image>http://www.fandm.edu/uploads/media_items/ann-richard-barshinger-center-for-musical-arts-1.300.250.c.jpg</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4006</id>
+        <name>Fulton Theatre / Opera House</name>
+        <description>
+            Central Pennsylvania's premier regional theatre and National Historic Landmark combines Broadway caliber musicals, 
+            comedies and dramas with the grandeur of ornate Victorian architecture.
+            The Fulton first opened its doors in 1852. Almost 160 years later, this National Historic Landmark Theatre continues 
+            to entertain, educate and delight audiences, bringing live theatre, music, and more than 100,000 patrons into downtown 
+            Lancaster annually. Since its inception, some of the brightest stars of theatre, music and film have appeared on its 
+            stage.
+            Today, under the leadership of Artistic Director Marc Robin and Managing Director Aaron A. Young, the Fulton Theatre 
+            produces a mix of comedies, dramas and musicals, employing the talents of professional directors, designers, 
+            playwrights and actors from the local community, New York and across the country. 
+        </description>
+        <address>
+            <street>12 North Prince Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17603</zipcode>
+        </address>
+        <phone>717-397-7425</phone>
+        <website>http://www.thefulton.org</website>
+        <seatingchart>
+            http://intl.stub.com/seatingcharts/x450/fulton-opera-house-end-stage-3915.jpg
+        </seatingchart>
+        <images>
+            <image>http://www.wickershamconstruction.com/images/gallery/fulton-opera_s.jpg</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4007</id>
+        <name>Lancaster Public Library</name>
+        <description>
+            As one of the oldest public libraries in the country, we have been providing library service in Lancaster 
+            for over 250 years. Our three locations in the county include Lancaster City, Leola, and Mountville.
+        </description>
+        <address>
+            <street>125 N. Duke Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17602</zipcode>
+        </address>
+        <phone>717-394-2651</phone>
+        <website>http://www.lancaster.lib.pa.us</website>
+    </venue>
+    <venue>
+        <id>4008</id>
+        <name>Demuth Museum</name>
+        <description>
+            The Demuth Museum is dedicated to developing awareness, understanding and appreciation of the art work and legacy 
+            of American modernist Charles Demuth. We engage and inspire diverse audiences through an innovative program of 
+            exhibitions, education, scholarship and collections activities.
+        </description>
+        <address>
+            <street>120 East King Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17602</zipcode>
+        </address>
+        <phone>717-299-9940</phone>
+        <website>http://www.demuth.org</website>
+        <images>
+            <image>http://www.demuth.org/_images/live/Mission_250_1.jpg</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4009</id>
+        <name>Pennsylvania College of Art and Design</name>
+        <description>
+            Pennsylvania College of Art &amp; Design celebrated its 30th year in 2012. When the senior class graduated 
+            on May 5, 2012, the college recognized thirty years of preparing students for a life -- and career -- in art and design.  
+            Pennsylvania College of Art &amp; Design’s strong Bachelor of Fine Arts program attracts aspiring professional 
+            artists who want to study in an urban environment, and within a community that actively supports the arts.
+            PCA&amp;D is a non-profit, professional art college offering four-year Bachelor of Fine Arts (BFA) programs in 
+            Fine Art, Graphic Design, Illustration, and Photography, and beginning in Fall 2014, a major in Digital Media.
+        </description>
+        <address>
+            <street>204 N. Prince Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17603</zipcode>
+        </address>
+        <phone>717-396-7833</phone>
+        <website>http://www.pcad.edu</website>
+        <images>
+            <image>http://collegeprowler.com/images/standard/29350/?v=71F51AF</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4010</id>
+        <name>North Museum of Natural History and Science </name>
+        <description>
+            In 2013, the North Museum of Natural History &amp; Science marks 60 years of inspiring curiosity and a love of 
+            science in children and adults of all ages. Through exhibits, events and educational programming, we hope to 
+            plant the seeds of exploration leading to a lifelong journey of discovery. Visit us often to find out about 
+            upcoming events and activities. There's always something new at the North!
+        </description>
+        <address>
+            <street>400 College Avenue</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17603</zipcode>
+        </address>
+        <phone>717-291-3941</phone>
+        <website>http://www.northmuseum.org</website>
+        <images>
+            <image>http://www.fandm.edu/uploads/media_items/north-museum-1.300.250.c.jpg</image>
+        </images>
+    </venue>
+    <venue>
+        <id>4011</id>
+        <name>Holy Trinity Lutheran Church</name>
+        <description>
+            Holy Trinity Lutheran Church, a vibrant city congregation with a long history and an eye to the future, 
+            is committed to excellence in worship, music, and outreach to the diverse community that makes up its 
+            South Duke Street neighborhood.
+            Each year since 1974 the church has hosted a concert series “Music at Trinity” with performances by 
+            national and regional musicians, with special emphasis on organ music. Trinity has the largest and one 
+            of the finest organs in Lancaster County containing four manuals and 99 ranks, which is partially housed 
+            in an historic 1774 case by David Tannenberg.   On First Fridays the church opens the doors of its 
+            sanctuary and Landmark Café for a variety of events including acoustic music, art exhibits, and poetry readings.
+        </description>
+        <address>
+            <street>31 South Duke Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17602</zipcode>
+        </address>
+        <phone>717-397-2734</phone>
+        <website>http://www.trinitylancaster.org/organ.php</website>
+        <images>
+            <image>http://www.trinitylancaster.org/images/organpic2.jpg</image>
+        </images>
+    </venue>
+</venues>

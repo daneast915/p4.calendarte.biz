@@ -1,0 +1,17 @@
+/* print rules */
+
+@media print {
+
+    .site_navigation,
+    .category_navigation {
+        display: none;
+    }
+
+    .content {
+	    float:none;
+	    width: auto;
+	    padding-left: 2%;
+	    margin-right: 2%;
+	    border-left: 0;
+    }
+}

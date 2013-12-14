@@ -1,0 +1,143 @@
+/*
+ * DataTables framework
+ */
+div.dataTables_wrapper {
+    background-color: #F8F8F8;
+    border-radius: 5px;
+    border: 1px solid darkgray;
+    margin-bottom: 1em;
+}
+
+div.dataTables_length {
+	float: left;
+}
+
+div.dataTables_filter {
+	float: right;
+}
+
+div.dataTables_info {
+	padding: 9px 6px 6px 6px;
+	float: left;
+}
+
+div.dataTables_paginate {
+	float: right;
+}
+
+div.dataTables_length,
+div.dataTables_filter,
+div.dataTables_paginate {
+	padding: 6px;
+}
+
+/* Self clearing - http://www.webtoolkit.info/css-clearfix.html */
+.dataTables_wrapper:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 
+html[xmlns] .dataTables_wrapper {
+	display: block;
+}
+ 
+* html .dataTables_wrapper {
+	height: 1%;
+}
+
+
+/*
+ * Table styles
+ */
+table.pretty {
+	width: 100%;
+	clear: both;
+}
+
+table.pretty td,
+table.pretty th {
+	padding: 5px;
+	border: 1px solid #fff;
+}
+
+/* Header cells */
+table.pretty thead th {
+    text-align: center;
+    background: #FAFAFA;
+}
+
+/* Body cells */
+table.pretty tbody th {
+    text-align: left;
+    background: #F0F0F0;
+}
+	
+table.pretty tbody td {
+    text-align: left;
+    background: #F8F8F8;
+}
+		
+table.pretty tbody tr.odd td {
+    background: #F0F0F0;
+}
+
+
+/*
+ * Pagination
+ */
+a.paginate_button, a.paginate_active {
+    display: inline-block;
+    background-color: #CCCCCC;
+    padding: 2px 6px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+a.paginate_active {
+	background-color: transparent;
+	border: 1px solid black;
+}
+
+a.paginate_button_disabled {
+    color: #666666;
+}
+.paging_full_numbers a:active {
+	outline: none
+}
+.paging_full_numbers a:hover {
+	text-decoration: none;
+}
+
+div.dataTables_paginate span>a {
+	width: 15px;
+	text-align: center;
+}
+
+
+/*
+ * Sorting
+ */
+table.pretty thead th.sorting_asc {
+    background: #E0E0E0 url('images/sort_asc.png') no-repeat right center;
+}
+
+table.pretty thead th.sorting_desc {
+	background: #E0E0E0 url('images/sort_desc.png') no-repeat right center;
+}
+
+table.pretty thead th.sorting {
+	background: #E0E0E0 url('images/sort_both.png') no-repeat right center;
+}
+
+@media print {
+    #directory-table_length,
+    #directory-table_filter,
+    #directory-table_info,
+    #directory-table_paginate {
+        display: none;
+    }
+}

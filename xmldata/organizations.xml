@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<organizations>
+    <organization>
+        <id>3001</id>
+        <type>choral</type>
+        <name>Wheatland Chorale</name>
+        <description>
+            The Wheatland Chorale has earned a reputation as one of Pennsylvania's premier choral ensembles. The singers, 
+            all volunteers, are selected through audition, and travel from throughout Central and Southeastern Pennsylvania 
+            for weekly rehearsals in Lancaster. The Chorale is named for its birthplace in the Wheatland Hills area of Lancaster. 
+            The popularity of the Wheatland Chorale has grown steadily. The regular season includes a concert subscription 
+            series, performed in Lancaster, Wyomissing and at Elizabethtown College.
+        </description>
+        <address>
+            <street/>
+            <box/>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode/>
+        </address>
+        <phone/>
+        <website>http://www.wheatlandchorale.org/</website>
+        <director>Eric Riley</director>
+        <artists>
+            <artist/>
+        </artists>
+        <performers>
+            <performer/>
+        </performers>
+        <images>
+            <image>
+                http://wheatlandchorale.org/wp-content/uploads/2012/11/wheatland-group2.jpg
+            </image>
+        </images>
+        <audioclips>
+            <audio/>
+        </audioclips>
+    </organization>
+    <organization>
+        <id>3002</id>
+        <type>choral</type>
+        <name>Musical Associates</name>
+        <description>
+            Musical Associates is a select group of singers and instrumentalists, dedicated to bringing the finest in choral music 
+            to music lovers in the Susquehanna Valley. Under the direction of Artistic Director Emery DeWitt, the singers and 
+            instrumentalists include many of the area's top soloists. Concerts are usually held in the summer.
+        </description>
+        <address>
+            <city>Lancaster</city>
+            <state>PA</state>
+        </address>
+        <phone/>
+        <website>http://www.musicalassociates.org/</website>
+        <director>Emery DeWitt</director>
+        <images>
+            <image>
+                http://musicalassociates.org/wp/wp-content/uploads/2013/03/MA-Header-weaver-ii-940x324-top-title1.jpg
+            </image>
+        </images>
+    </organization>
+    <organization>
+        <id>3003</id>
+        <type>orchestra</type>
+        <name>Lancaster Symphony Orchestra</name>
+        <description>
+            Now in its 66th season, the Lancaster Symphony Orchestra has played for over three decades under the direction of 
+            Maestro Stephen Gunzenhauser. The Symphony has evolved from a community orchestra playing a few concerts per year 
+            into a $1.7 million organization of professional musicians presenting six Classic Series concerts, the Sounds of 
+            the Season holiday concert series and two New Year's Celebration concerts. The concerts feature international 
+            guest artists and conductors and frequent U.S. and world premieres, such as 2012's national premiere of 
+            Disney's Fantasia Live In Concert. Opening Night Friday audiences are also treated to a post-concert reception 
+            where they can interact with the Symphony's musicians and guest artists.
+        </description>
+        <address>
+            <street>226 North Arch Street</street>
+            <box/>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17603</zipcode>
+        </address>
+        <phone>717-291-6440</phone>
+        <website>http://www.lancastersymphony.org/</website>
+        <director>Stephen Gunzenhauser</director>
+        <images>
+            <image>http://www.witf.org/center-stage/LSO_orchestra_Gunzenhauser%2520resized%2520homepg.jpg</image>
+        </images>
+    </organization>
+    <organization>
+        <id>3004</id>
+        <type>orchestra</type>
+        <name>Allegro - the Chamber Orchestra of Lancaster</name>
+        <description>
+            Allegro means joyful … fast and lively … a different musical experience … We invite you to experience the joy 
+            of Allegro! Allegro brings the music to life through concerts that are specially designed to be engaging, 
+            enjoyable and fun. Our musicians clearly love what they are doing. The players mingle with the audience before 
+            concerts, during intermission and after performances.
+        </description>
+        <address>
+            <box>P.O. Box 1741</box>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17608</zipcode>
+        </address>
+        <phone>717-560-7317</phone>
+        <website>http://www.allegrochamberorchestra.org/</website>
+        <email>info@allegrochamberorchestra.org</email>
+        <director>Brian Norcross</director>
+        <images>
+            <image>http://assets3.razoo.com/assets/media/images/000/017/146/images/size_550x415_razoo%20550x415.png?1297798878</image>
+            <image>http://allegrochamberorchestra.org/wp/wp-content/uploads/2013/04/DSC_0757-1024x680.jpg</image>
+        </images>
+    </organization>
+    <organization>
+        <id>3005</id>
+        <type>opera</type>
+        <name>OperaLancaster</name>
+        <description>
+            OperaLancaster was founded as the Lancaster Opera Workshop in the early 50s in the small in-home studio of 
+            Frederick Robinson and Dorothy Darr. Today, OperaLancaster is the only surviving opera company in Pennsylvania 
+            between Philaldelphia and Pittsburg producing opera with full sets, costumes, and full orchestra every year.
+            Each season, OperaLancaster offers three main stage productions: A light production in English in the Fall, 
+            an annual production of Amahl &amp; the Night Visitors in January, and a traditional staged Grand Opera in the 
+            Spring. Additionally, OperaLancaster produces and presents smaller concerts, productions, community outreach, 
+            lectures, and educational series throughout the year.
+        </description>
+        <address>
+            <street>42 North Prince Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17603</zipcode>
+        </address>
+        <phone>717-871.7814</phone>
+        <website>http://www.operalancaster.org</website>
+        <email>info@operalancaster.org</email>
+        <director>William Dewan</director>
+        <images>
+            <image>https://si0.twimg.com/profile_images/752170165/operalanc.png</image>
+        </images>
+    </organization>
+    <organization>
+        <id>3006</id>
+        <type>theatre</type>
+        <name>PRiMA Theatre Company</name>
+        <description>
+            We believe that the arts are at their best when they speak your language, jab at the status quo and enrich your life. 
+            That is why PRiMA Theatre Company, Lancaster's freshest professional theatre, is beckoning in a new era of relevant 
+            and modern arts programming to the Lancaster area. Producing Director, Mitchell M. Nugent leads the non-profit 
+            organization in exciting main-stage shows in concert style and energetic, top-notch cabarets at The Ware Center.
+        </description>
+        <address>
+            <street>42 North Prince Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17603</zipcode>
+        </address>
+        <phone>717-327-5124</phone>
+        <website>http://www.operalancaster.org</website>
+        <email>info@operalancaster.org</email>
+        <director>Mitchell M. Nugent</director>
+        <images>
+            <image>http://sphotos-a.xx.fbcdn.net/hphotos-snc6/p206x206/253436_501960279832044_180804686_n.jpg</image>
+        </images>
+    </organization>
+    <organization>
+        <id>3007</id>
+        <type>museum</type>
+        <name>Demuth Museum</name>
+        <description>
+            The Demuth Museum is dedicated to developing awareness, understanding and appreciation of the art work and legacy
+            of American modernist Charles Demuth. We engage and inspire diverse audiences through an innovative program of
+            exhibitions, education, scholarship and collections activities.
+        </description>
+        <address>
+            <street>120 East King Street</street>
+            <city>Lancaster</city>
+            <state>PA</state>
+            <zipcode>17602</zipcode>
+        </address>
+        <phone>717-299-9940</phone>
+        <website>http://www.demuth.org</website>
+        <images>
+            <image>http://www.demuth.org/_images/live/Mission_250_1.jpg</image>
+        </images>
+    </organization>
+</organizations>

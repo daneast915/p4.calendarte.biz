@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<events>
+    <event>
+        <id>1001</id>
+        <organization>3002</organization>
+        <name>The Marriage of True Minds</name>
+        <description>
+            This year, we present a program inspired by William Shakespeare’s great Sonnet 116: Let me not to the marriage of true minds. This stirring declaration of love has inspired many people over the centuries, and we have chosen an eclectic set of music that explores that marriage. Be sure to check out our Repertoire page for more details of the program.
+        </description>
+        <artists>
+            <artist/>
+        </artists>
+        <performers>
+            <performer/>
+        </performers>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>http://www.musicalassociates.org/</website>
+        <admission-info>
+            Admission to our concerts is free, with a free-will offering taken.
+        </admission-info>
+        <phone/>
+        <address>
+            <street/>
+            <box/>
+            <city/>
+            <state/>
+            <zipcode/>
+        </address>
+    </event>
+    <event>
+        <id>1002</id>
+        <organization>3004</organization>
+        <name>Allegro: The Three Amigos</name>
+        <description>
+            Allegro welcomes Eric Berlin, Ken Laudermilch and Loren Toplitz, three trumpeters with local ties, for Telemann’s Concerto for Three trumpets, 2 oboes and timpani in D Major and Leroy Anderson’s delightful Bugler’s Holiday. The program also includes Mozart’s Overture to Idomeneo, Beethoven’s Symphony No.8 and Ash, a modern piece by composer Michael Torke.
+        </description>
+        <toppick>1</toppick>
+        <performers>
+            <performer>Eric Berlin</performer>
+            <performer>Ken Laudermilch</performer>
+            <performer>Loren Toplitz</performer>
+        </performers>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>
+            http://allegrochamberorchestra.org/wp/ai1ec_event/allegro-the-three-amigos/?instance_id=54
+        </website>
+        <purchase-link>http://allegrochamberorchestra.org/wp/tickets/</purchase-link>
+        <admission-info>$5 - $20</admission-info>
+    </event>
+    <event>
+        <id>1003</id>
+        <organization>3004</organization>
+        <name>Allegro NextGEN: Beethoven’s Ninth in the Park!</name>
+        <description>
+            We are excited to return to Longs Park this year to present Beethoven’s 9th Symphony. Allegro musicians and alumni of Allegretto unite to form Allegro NextGEN. This experience gives younger musicians an opportunity to play alongside their professional counterparts. Area choirs will provide the glorious choral parts along soloists Kristen Sims (soprano), Amy Yovanovich (alto), Jeffrey Fahnestock (tenor) and Dean Sensenig (baritone).
+        </description>
+        <toppick>1</toppick>
+        <performers>
+            <performer>Kristen Sims</performer>
+            <performer>Amy Yovanovich</performer>
+            <performer>Jeffrey Fahnestock</performer>
+            <performer>Dean Sensenig</performer>
+        </performers>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>
+            http://allegrochamberorchestra.org/wp/ai1ec_event/allegro-nextgen-beethovens-ninth-in-the-park/?instance_id=63
+        </website>
+        <purchase-link>http://allegrochamberorchestra.org/wp/tickets/</purchase-link>
+        <admission-info>Free</admission-info>
+    </event>
+    <event>
+        <id>1004</id>
+        <organization>3004</organization>
+        <name>Allegro: A Little Night Music</name>
+        <description>
+            Hum along to Mozart’s Eine Kleine Nachmusik as we say farewell to our old home at the Barshinger Center. This 
+            concert presents a world premiere by F&amp;M faculty member John Carbon as well as Beethoven’s Overture to 
+            Prometheus and Haydn’s Symphony no. 90.
+        </description>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>
+            http://allegrochamberorchestra.org/wp/ai1ec_event/allegro-a-little-night-music/?instance_id=57
+        </website>
+        <purchase-link>http://allegrochamberorchestra.org/wp/tickets/</purchase-link>
+        <admission-info>$5 - $20</admission-info>
+    </event>
+    <event>
+        <id>1005</id>
+        <organization>3004</organization>
+        <name>Music in the Round: Jazzical</name>
+        <description>
+            Our second Music in the Round concert is titled Jazzical. This event begins at 6:45 with appetizers, wine and beer 
+            followed by an hour of music in the beautiful Atrium. The audience surrounds the musicians while they play in an 
+            intimate environment. This exciting Music in the Round concert includes Francaix’s Sept Danses, Stravinsky’s Octet, 
+            Torke’s Adjustable Wrench and a rendition of Joplin’s The Entertainer.
+        </description>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>
+            http://allegrochamberorchestra.org/wp/ai1ec_event/music-in-the-round-jazzical/?instance_id=64
+        </website>
+        <admission-info>$20</admission-info>
+    </event>
+    <event>
+        <id>1006</id>
+        <organization>3004</organization>
+        <name>Allegro: Calendar Colors</name>
+        <description>
+            Allegro Chamber Orchestra presents yet another exciting world premiere, Calendar Colors by our very own, Ralph Lehman! 
+            The program also includes Rossini’s spritely Overture to Cinderella and Schubert’s melodic Unfinished Symphony followed 
+            by a humorous compilation of well-known themes entitled The Unbegun Symphony by PDQ Bach. There’s a little something 
+            for everyone at this concert!
+        </description>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website/>
+        <purchase-link>http://allegrochamberorchestra.org/wp/tickets/</purchase-link>
+        <admission-info>$5 - $20</admission-info>
+    </event>
+    <event>
+        <id>1007</id>
+        <organization>3004</organization>
+        <name>Music in the Round: Brass Night</name>
+        <description>
+            Our first Allegro expansion into the fall is another exciting Music in the Round program: Brass Night. This concert 
+            again features appetizers from a local restaurant as well as wine and beer. The concert features Purcell’s Trumpet Tune, 
+            Susato’s Dances, and Mussorgsky’s Pictures at an Exhibition, all performed by members of the brass sections of Allegro.
+        </description>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>
+            http://allegrochamberorchestra.org/wp/ai1ec_event/music-in-the-round-brass-night/?instance_id=65
+        </website>
+        <admission-info>$20</admission-info>
+    </event>
+    <event>
+        <id>1008</id>
+        <organization>3003</organization>
+        <name>Rodriguez Interprets Rachmaninoff, plus Mozart and Liszt</name>
+        <description>
+            The synergy of nature, poetry, and the piano, featuring Lancaster Symphony Orchestra String Quartet and 
+            Santiago Rodriguez, piano.
+        </description>
+        <toppick>1</toppick>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>
+            http://www.lancastersymphony.org/ConcertsandTickets/SeasonataGlance/tabid/96/eventid_561/25/Default.aspx
+        </website>
+        <admission-info>$20</admission-info>
+    </event>
+    <event>
+        <id>1009</id>
+        <organization>3001</organization>
+        <name>Wheatland Christmas</name>
+        <description>
+            Annual Christmas concert by Wheatland Chorale.
+        </description>
+        <toppick>1</toppick>
+        <category>Music</category>
+        <genre>Classical</genre>
+        <website>
+            http://wheatlandchorale.org/events/
+        </website>
+        <admission-info>$20</admission-info>
+    </event>
+</events>
