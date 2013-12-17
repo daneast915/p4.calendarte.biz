@@ -1,12 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <shows>
     <show>
-        <id>2001</id>
-        <event>1001</event>
+        <id>2001</id>  <!--show_id-->
+        <created></created>
+        <modified></modified>
+        <user_id></user_id>          
+        <event>1001</event>   <!--event_id-->
         <day>Saturday</day>
         <date>2013-08-24</date>
         <time>19:00</time>
-        <venue>4001</venue>
+        <venue>4001</venue>   <!--venue_id-->
     </show>
     <show>
         <id>2002</id>

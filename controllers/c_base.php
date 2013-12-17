@@ -13,7 +13,7 @@ class base_controller {
 	public function __construct() {
 						
 		# Instantiate User obj
-			$this->userObj = new WhatsUpUser();
+			$this->userObj = new CalendArteUser();
 			
 		# Authenticate / load user
 			$this->user = $this->userObj->authenticate();					

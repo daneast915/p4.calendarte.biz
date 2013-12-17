@@ -1,6 +1,7 @@
-<h2>Sign Up for "<?=APP_NAME?>"</h2>
 
 <section id="users_signup">
+
+	<h2>Sign Up for <?=APP_NAME?></h2>
 
 	<form method='POST' action='/users/signup'>
 	
@@ -42,3 +43,5 @@
 	</p>
 
 </section>
+
+<br/>

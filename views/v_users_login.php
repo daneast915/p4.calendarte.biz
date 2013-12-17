@@ -1,6 +1,7 @@
-<h2>Log in to "<?=APP_NAME?>"</h2>
 
 <section id="users_login">
+
+	<h2>Login to <?=APP_NAME?></h2>
 
 	<form method='POST' action='/users/login'>
 	
@@ -26,7 +27,7 @@
 		<input type='password' name='password' id='password' class='textbox'/>
 		<br/><br/>
 
-		<input type='submit' value='Log In' class='button'/>
+		<input type='submit' value='Login' class='button'/>
 
 	</form>
 	
@@ -38,3 +39,4 @@
 
 </section>
 
+<br/>

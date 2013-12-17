@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <events>
     <event>
-        <id>1001</id>
+        <id>1001</id>  <!--event_id-->
+        <created></created>
+        <modified></modified>
+        <user_id></user_id>
         <organization>3002</organization>
         <name>The Marriage of True Minds</name>
         <description>
@@ -19,17 +22,13 @@
         <admission-info>
             Admission to our concerts is free, with a free-will offering taken.
         </admission-info>
-        <phone/>
-        <address>
-            <street/>
-            <box/>
-            <city/>
-            <state/>
-            <zipcode/>
-        </address>
+        <purchase_link/>
     </event>
     <event>
         <id>1002</id>
+        <created></created>
+        <modified></modified>
+        <user_id></user_id>
         <organization>3004</organization>
         <name>Allegro: The Three Amigos</name>
         <description>

@@ -1,4 +1,4 @@
-/* Final Project - Dan East */
+/* CSS File for Project 4, CSCI E15 - Dynamic Web Applications, Dan East */
 
 body {
 	font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", 
@@ -74,7 +74,18 @@ and (max-device-width: 1024px) {
 .site_navigation li {
 	display: inline;
 	margin-left: 0.4em;
-	margin-right: 0.4em;}	
+	margin-right: 0.4em;
+}	
+
+.site_navigation .user_links {
+	float: right;
+    font-size: smaller;
+    font-weight: normal;
+}
+
+.site_navigation .user_name {
+	font-style: italic;
+}
 
 .site_navigation a:link { 
 	color: black;
@@ -104,12 +115,6 @@ a:active {
 
 .site_navigation li.youarehere>a {
 	color: FireBrick;
-}
-
-.site_navigation li.login {
-    float: right;
-    font-size: smaller;
-    font-weight: normal;
 }
 
 .category_navigation {
@@ -453,4 +458,91 @@ section.event-summaries  {
     text-align: center;
 }
 
+.add-form {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1em;
+	padding-top: 0;
+}
 
+.add-form input {
+	border: 1px solid darkgray;
+	border-radius: 4px;
+	padding: .4em;
+	margin-top: .2em;
+	margin-bottom: 1em;
+}
+
+.add-form label {
+	font-weight: bold;
+	display: block;
+}
+
+#users_login,
+#users_signup,
+#users_profile,
+#users_profileedit,
+#organization-add,
+#venue-add {
+	background-color: #F0F0F0;
+	border-color: #bbb;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	width: 40em;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: .8em;
+	padding: .5em;	
+	padding-left: 2em;
+	padding-right: 2em;
+}
+
+.textbox,
+textarea {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;	
+	background-color: White;
+	border-color: #bbb;
+	border-radius: 5px;
+	border-width: 1px;
+	border-style: solid;
+	font-size: medium;
+}
+
+.textbox {
+	height: 1.0em;
+}
+
+.add-form textarea {
+	height: 6em;
+	width: 101%;
+	margin-top: .2em;
+	margin-bottom: 1em;
+	font-family: Calibri, Arial, Helvetica, sans-serif;
+}
+
+.city {
+	width: 50%;
+}
+
+.state {
+	width: 25%;
+	height: 1.8em;
+	margin-bottom: 1em;
+}
+
+.zipcode {
+	width: 25%;
+}
+
+.error {
+	color: Red;
+	font-weight: bold;
+}
+
+.message {
+	color: DarkBlue;
+	font-weight: bold;
+}

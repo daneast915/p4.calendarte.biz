@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <venues>
     <venue>
-        <id>4001</id>
+        <id>4001</id>     <!--venue_id-->
+        <created></created>
+        <modified></modified>
+        <user_id></user_id>        
         <name>Lancaster Church of the Brethren</name>
         <description/>
         <address>

@@ -24,7 +24,7 @@ class users_controller extends base_controller {
     	if (!$this->user)
     		Router::redirect('/');
 		else
-    		Router::redirect("/posts/index");	
+    		Router::redirect('/'); // "/posts/index");	
 	}
 
  	/*-------------------------------------------------------------------------------------------------
@@ -33,8 +33,9 @@ class users_controller extends base_controller {
    public function signup() {
 
         # Setup view
-		$this->template->content = View::instance('v_users_signup');;	
+		$this->template->content = View::instance('v_users_signup');
 		$this->template->title   = "Sign Up";
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 
         # Render template
 		if (!$_POST) {
@@ -127,11 +128,12 @@ class users_controller extends base_controller {
     public function login($param = NULL) {
     
     	if ($this->user)
-			Router::redirect('/posts/index'); 
+			Router::redirect('/'); // posts/index'); 
 	
         # Setup view
 		$this->template->content = View::instance('v_users_login');
-		$this->template->title   = "Log In";
+		$this->template->title   = "Login";
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 		
 		# Set message based on the $param
 		if (isset($param)) {
@@ -165,7 +167,7 @@ class users_controller extends base_controller {
     	} 
 		
 		# Send them to the main page - or whereever
-		Router::redirect("/posts/index");
+		Router::redirect('/'); // "/posts/index");
 	}
 
 	/*-------------------------------------------------------------------------------------------------
@@ -196,6 +198,7 @@ class users_controller extends base_controller {
 		# Setup view
 		$this->template->content = View::instance('v_users_profile');
 		$this->template->title = 'Profile';
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 		
 		# Set message based on the $param
 		if (isset($param)) {
@@ -226,6 +229,7 @@ class users_controller extends base_controller {
 		
 		$this->template->content = $content;
 		$this->template->title = 'Edit Profile';
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 	
 		if (!$_POST) {
 			echo $this->template;

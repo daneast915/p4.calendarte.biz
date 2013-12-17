@@ -1,7 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <organizations>
     <organization>
-        <id>3001</id>
+        <id>3001</id>     <!--organization_id-->
+        <user_id></user_id>
+        <category>Music</category>
+        <genre>Classical</genre>
         <type>choral</type>
         <name>Wheatland Chorale</name>
         <description>

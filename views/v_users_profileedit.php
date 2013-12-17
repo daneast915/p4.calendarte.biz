@@ -1,6 +1,7 @@
-<h2>Edit Profile for <?=$user->first_name?></h2>
 
 <section id="users_profileedit">
+
+	<h2>Edit Profile for <?=$user->first_name?></h2>
 
 	<form method='POST' action='/users/profileedit'>
 	
@@ -31,3 +32,5 @@
 	</form>
 
 </section>
+
+<br/>

@@ -52,6 +52,7 @@
     <?php include("includes/header.php"); ?>
 
     <?php include("includes/site-navigation.php"); ?>
+
     <?php include("includes/category-navigation.php"); ?>
 
 <!--

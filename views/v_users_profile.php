@@ -1,6 +1,7 @@
-<h2>Profile for <?=$user->first_name?></h2>
 
 <section id="users_profile">
+
+    <h2>Profile for <?=$user->first_name?></h2>
 	
 	<?php if (isset($message)): ?>
 		<div class='message'>
@@ -28,3 +29,5 @@
     </p>
 
 </section>
+
+<br/>

@@ -19,7 +19,7 @@ class index_controller extends base_controller {
 	public function index() {
 		
     	# If user is blank, they're not logged in; redirect them to the Login page
-    	if (!$this->user) {
+    	//if (!$this->user) {
 			# Setup view
 			$this->template->content = View::instance('v_index_index');	
 			$this->template->title   = "Welcome";
@@ -50,9 +50,9 @@ class index_controller extends base_controller {
 	
 			# Render template
 			echo $this->template;
-			}
-		else
-    		Router::redirect("/posts/index");	
+		//	}
+		//else
+    	//	Router::redirect("/posts/index");	
 
 	} # End of method
 	
