@@ -123,7 +123,7 @@ class venues_controller extends base_controller {
 		# Array for field names
 		$field_names = Array(
 			"name" => "Name",
-			"description" => "Description",
+			//"description" => "Description",
 			"address_street" => "Street",
 			"address_city" => "City",
 			"address_state" => "State",

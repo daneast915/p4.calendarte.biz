@@ -3,7 +3,7 @@
 
 	<h2>Edit Profile for <?=$user->first_name?></h2>
 
-	<form method='POST' action='/users/profileedit'>
+	<form class='user-form' method='POST' action='/users/profileedit'>
 	
 		<?php if (isset($error) && strlen($error) > 0): ?>
 			<div class='error'>

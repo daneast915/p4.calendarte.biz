@@ -87,55 +87,104 @@ class events_controller extends base_controller {
         }
 	}    
 
-	/*-------------------------------------------------------------------------------------------------
+ 	/*-------------------------------------------------------------------------------------------------
 	events/add controller method
 	-------------------------------------------------------------------------------------------------*/
-	public function add() {
-	
-		# Setup view
-		$this->template->content = View::instance('v_posts_add');
-		$this->template->title = "New Post";
-		
-		# Render templates
-		if (!$_POST) {
-			echo $this->template;
+   	public function add() {
+
+   		if (!$this->user || !$_POST)
+    		Router::redirect('/events/index');
+
+        # Setup view
+		$this->template->content = View::instance('v_events_add');;	
+		$this->template->title   = "New Event";
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
+
+        # Render template
+		if (isset($_POST['from_organization'])) {
+			$this->template->content->organization_id = $_POST['organization_id'];
+			$this->template->content->name = '';
+			$this->template->content->description = '';
+			$this->template->content->website = '';
+			$this->template->content->purchase_link = '';
+			$this->template->content->admission_info = '';
+
+        	echo $this->template;
 			return;
-		}
+    	}
+		
+ 		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
 		# Innocent until proven guilty
 		$error = false;
 		$this->template->content->error = '';
 		
- 		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
-		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+		# Array for field names
+		$field_names = Array(
+			"organization_id" => "Organization",
+			"name" => "Name",
+			"description" => "Description",
+			"website" => "Website",
+			"purchase_link" => "Purchase Link",
+			"admission_info" => "Admission Info"
+			);
+		
+		# Loop through the POST data to validate
+		foreach($_POST as $field_name => $value) {
+			# Sanitize the data
+			$_POST[$field_name] = $this->userObj->cleanse_data ($_POST[$field_name]);
+
+			# If a field is blank, add a message
+			if ($value == "") {
+				$this->template->content->error .= $field_names[$field_name].' must contain a value.<br/>';
+				$error = true;
+			}
 			
-		# Validate the post
-		if (empty($_POST['content'])) {
-			$this->template->content->error .= 'Post must not be empty.<br/>';
-			$error = true;
+			# If a field contains invalid characters, add a message
+			/*---
+			if ($this->userObj->check_for_invalid_chars ($value))  {
+				$this->template->content->error .= $field_names[$field_name].' contains invalid characters.<br/>';
+				$_POST[$field_name] = '';
+				$error = true;				
+			}
+			---*/
 		}
 
 		# If any errors, display the page with the errors
 		if ($error) {
+			$this->template->content->organization_id = $_POST['organization_id'];
+			$this->template->content->name = $_POST['name'];
+			$this->template->content->description = $_POST['description'];
+			$this->template->content->website = $_POST['website'];
+			$this->template->content->purchase_link = $_POST['purchase_link'];
+			$this->template->content->admission_info = $_POST['admission_info'];
+
 			echo $this->template;
 			return;
 		}
-
-		# Add a post for this user
-		$_POST['content'] = $this->userObj->cleanse_data ($_POST['content']);
+	
+		# More data we want stored with the user
+		$_POST['created']  = Time::now();
+		$_POST['modified'] = Time::now();
+    
+		# Insert this event into the database
 		$this->userObj->add_event ($this->user->user_id, $_POST);
-		
-		# Feedback
-		Router::redirect("/events/index/1");
-	}
+
+		# Send them to the login screen
+		Router::redirect('/events/index/1'); 
+    }
 	
 	/*-------------------------------------------------------------------------------------------------
 	events/delete controller method
 	-------------------------------------------------------------------------------------------------*/
 	public function delete() {
-	
+
+   		if (!$this->user)
+    		Router::redirect('/events/index');
+    			
 		# Delete this post
-		$this->userObj->delete_event ($this->user->user_id, $_POST['event_id']);
+		$this->userObj->delete_organization ($this->user->user_id, $_POST['event_id']);
 			
 		# Send them back
 		Router::redirect("/events/index/2");	

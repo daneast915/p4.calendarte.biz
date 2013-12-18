@@ -43,6 +43,10 @@ header a.header_link {
 	padding-top: 50px;
 }
 
+.textbox {
+	height: 1.0em;
+}
+
 .site_navigation {
 	font-size: large;
 	font-weight: bold;
@@ -447,6 +451,7 @@ section.event-summaries  {
 	border: 1px solid darkgray;
 	border-radius: 4px;
 	padding: .2em;
+	height: 1.5em;
 }
 
 .nav-search-form #keyword {
@@ -483,7 +488,8 @@ section.event-summaries  {
 #users_profile,
 #users_profileedit,
 #organization-add,
-#venue-add {
+#venue-add,
+#event-add {
 	background-color: #F0F0F0;
 	border-color: #bbb;
 	border-radius: 5px;
@@ -511,10 +517,6 @@ textarea {
 	font-size: medium;
 }
 
-.textbox {
-	height: 1.0em;
-}
-
 .add-form textarea {
 	height: 6em;
 	width: 101%;
@@ -528,7 +530,7 @@ textarea {
 }
 
 .state {
-	width: 25%;
+	width: 50%;
 	height: 1.8em;
 	margin-bottom: 1em;
 }
@@ -545,4 +547,14 @@ textarea {
 .message {
 	color: DarkBlue;
 	font-weight: bold;
+}
+
+.organization {
+	width: 102%;
+	height: 1.8em;
+	margin-bottom: 1em;
+}
+
+.user-form .textbox {
+	height: 1.5em;
 }

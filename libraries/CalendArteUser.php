@@ -89,6 +89,29 @@ class CalendArteUser extends User {
 	
 	}
 
+	public function add_event ($user_id, $data) {
+	
+		$_data = $data;
+		
+		# Associate this event with this user
+		$_data['user_id'] = $user_id;
+		
+		# Unix timestamp of when this event was created / modified
+		$_data['created'] = Time::now();
+		$_data['modified'] = Time::now();	
+		
+		return DB::instance(DB_NAME)->insert('events', $_data);
+	
+	}	
+
+	public function delete_event ($user_id, $venue_id) {
+	
+		# Delete the event from the posts table
+		$where_condition = 'WHERE event_id = '.$event_id;
+		return DB::instance(DB_NAME)->delete('event', $where_condition);
+	
+	}
+
 	/*-------------------------------------------------------------------------------------------------
 	Get all of the posts for the users this user is following, including their own
 

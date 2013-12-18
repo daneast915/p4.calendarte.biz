@@ -3,7 +3,7 @@
 
 	<h2>Sign Up for <?=APP_NAME?></h2>
 
-	<form method='POST' action='/users/signup'>
+	<form class='user-form' method='POST' action='/users/signup'>
 	
 		<?php if (isset($error) && strlen($error) > 0): ?>
 			<div class='error'>

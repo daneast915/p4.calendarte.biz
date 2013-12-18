@@ -3,7 +3,7 @@
 
 	<h2>Login to <?=APP_NAME?></h2>
 
-	<form method='POST' action='/users/login'>
+	<form class='user-form' method='POST' action='/users/login'>
 	
 		<?php if (isset($error) && strlen($error) > 0): ?>
 			<div class='error'>
