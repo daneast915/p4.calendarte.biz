@@ -39,7 +39,7 @@
 			information and website links to their own website and ticketing services. 
 
 			<p>
-			the initial location for arts events is my hometown of Lancaster, PA.
+			The initial location for arts events is my hometown of Lancaster, PA.
 			The long-term goal for CalendArté will be national in scope.
 	        
 	    </div>

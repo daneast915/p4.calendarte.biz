@@ -1,7 +1,7 @@
 <?php
 
-// ini_set('display_errors', 'On');
-// error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 
 class users_controller extends base_controller {
 
@@ -167,8 +167,8 @@ class users_controller extends base_controller {
 			return;
     	} 
 		
-		# Send them to the main page - or whereever
-		Router::redirect('/'); // "/posts/index");
+		# Send them to the main page
+		Router::redirect('/'); 
 	}
 
 	/*-------------------------------------------------------------------------------------------------
@@ -184,7 +184,7 @@ class users_controller extends base_controller {
 		$this->userObj->logout ($this->user->email);
         
         # Send them back to the main index.
-        Router::redirect("/users/login/2");
+        Router::redirect("/");
     }
 
 	/*-------------------------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
-include 'includes/classes.php';
+require_once 'includes/findinxml.php';
 
 class events_controller extends base_controller {
 
@@ -188,6 +188,15 @@ class events_controller extends base_controller {
 			
 		# Send them back
 		Router::redirect("/events/index/2");	
+	}
+	
+	/*-------------------------------------------------------------------------------------------------
+	events/search controller method
+	-------------------------------------------------------------------------------------------------*/
+	public function search() {
+
+    	Router::redirect('/events/index');
+
 	}
 
 } # end of the class

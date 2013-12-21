@@ -3,7 +3,7 @@
 ini_set('display_errors', 'On');
 error_reporting(E_ALL);
 
-include 'includes/classes.php';
+require_once 'includes/findinxml.php';
 
 class organizations_controller extends base_controller {
 

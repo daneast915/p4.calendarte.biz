@@ -92,10 +92,10 @@
 		<input type='text' name='address_zipcode' id='address_zipcode' class='zipcode textbox'
 				value='<?=$address_zipcode?>' />
 		<br>
-		<br>
 		<label for='website'>Website *</label>
 		<input type='text' name='website' id='website' class='textbox'
 				value='<?=$website?>' />
+		<br>
 		<label for='email'>Email Address *</label>
 		<input type='text' name='email' id='email' class='textbox'
 				value='<?=$email?>' />
