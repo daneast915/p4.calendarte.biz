@@ -13,6 +13,15 @@
 		    <!-- end breadcrumb navigation -->             
             
             <h2 class="before-summaries">Events</h2>
+ 
+            <hr class="clearme"/>
+	
+			<?php if (isset($message)): ?>
+				<div class='message'>
+					<?=$message?>
+				</div>
+				<br/>
+			<?php endif; ?>
             
             <section class="event-summaries">
 

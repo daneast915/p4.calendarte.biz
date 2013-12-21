@@ -133,6 +133,7 @@ class users_controller extends base_controller {
         # Setup view
 		$this->template->content = View::instance('v_users_login');
 		$this->template->title   = "Login";
+		$this->template->body_id = "login";
 		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 		
 		# Set message based on the $param
@@ -198,6 +199,7 @@ class users_controller extends base_controller {
 		# Setup view
 		$this->template->content = View::instance('v_users_profile');
 		$this->template->title = 'Profile';
+		$this->template->body_id = "profile";
 		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 		
 		# Set message based on the $param
@@ -229,6 +231,7 @@ class users_controller extends base_controller {
 		
 		$this->template->content = $content;
 		$this->template->title = 'Edit Profile';
+		$this->template->body_id = "profile";
 		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 	
 		if (!$_POST) {

@@ -55,5 +55,17 @@ class index_controller extends base_controller {
     	//	Router::redirect("/posts/index");	
 
 	} # End of method
-	
+		
+	/*-------------------------------------------------------------------------------------------------
+	Accessed via http://localhost/index/about/
+	-------------------------------------------------------------------------------------------------*/
+	public function about() {
+
+		# Setup view
+		$this->template->content = View::instance('v_index_about');	
+		$this->template->title   = "About";
+		$this->template->body_id = "about";	
+
+		echo $this->template;
+	}
 } # End of class

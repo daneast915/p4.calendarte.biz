@@ -13,7 +13,25 @@
 		    </nav>
 		    <!-- end breadcrumb navigation -->             
             
-            <h2>Venues</h2>
+            <?php if ($user): ?>
+	            <div class='add-link'>
+	            	<form method='POST' action='/venues/add'>
+						<input type='submit' value='Add Venue' class='detail-button' />
+					</form>
+	            </div>
+			<?php endif; ?>          
+
+            <h2 class="before-list">Venues</h2>
+
+            <hr class="clearme"/>
+	
+			<?php if (isset($message)): ?>
+				<div class='message'>
+					<?=$message?>
+				</div>
+				<br/>
+			<?php endif; ?>
+
             <table id="directory-table" class="pretty">
 	            <thead>
 		            <tr>

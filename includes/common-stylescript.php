@@ -1,3 +1,4 @@
+    <!-- Common CSS and JS files -->
     <link rel="stylesheet" href="/css/style.css" type="text/css" />
     <link rel="stylesheet" href="/css/print.css" type="text/css" media="print" />
     <link rel="stylesheet" href="/css/dataTables.css" type="text/css" />

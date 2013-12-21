@@ -20,12 +20,21 @@ class venues_controller extends base_controller {
 	/*-------------------------------------------------------------------------------------------------
 	venues/index controller method
 	-------------------------------------------------------------------------------------------------*/
-    public function index() {
+    public function index($param = NULL) {
 	
 		# Setup the View
 		$this->template->content = View::instance("v_venues_index");
 		$this->template->title = "Venues";	
 		$this->template->body_id = "venues";
+		
+		# Set message based on the $param
+		if (isset($param)) {
+			switch ($param) {
+				case 1:
+					$this->template->content->message = "Venue added.<br/>";
+					break;
+			}
+		}
 
 	    $eventsXML = getEvents();
 	    $organizationsXML = getOrganizations();
@@ -174,9 +183,9 @@ class venues_controller extends base_controller {
 			$this->template->content->website = $_POST['website'];
 			$this->template->content->phone = $_POST['phone'];
 			$this->template->content->image_url = $_POST['image_url'];
-			$this->template->content->seating_chart = $_POST['seating_chart'];
-			$this->template->content->accessibility_info = $_POST['accessibility_info'];
-			$this->template->content->parking_info = $_POST['parking_info'];
+			//$this->template->content->seating_chart = $_POST['seating_chart'];
+			//$this->template->content->accessibility_info = $_POST['accessibility_info'];
+			//$this->template->content->parking_info = $_POST['parking_info'];
 			
 			$this->template->content->email = $email;
 

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <organizations>
     <organization>
         <id>3001</id>     <!--organization_id-->
@@ -8,11 +8,7 @@
         <type>choral</type>
         <name>Wheatland Chorale</name>
         <description>
-            The Wheatland Chorale has earned a reputation as one of Pennsylvania's premier choral ensembles. The singers, 
-            all volunteers, are selected through audition, and travel from throughout Central and Southeastern Pennsylvania 
-            for weekly rehearsals in Lancaster. The Chorale is named for its birthplace in the Wheatland Hills area of Lancaster. 
-            The popularity of the Wheatland Chorale has grown steadily. The regular season includes a concert subscription 
-            series, performed in Lancaster, Wyomissing and at Elizabethtown College.
+            The Wheatland Chorale has earned a reputation as one of Pennsylvania's premier choral ensembles. The singers, all volunteers, are selected through audition, and travel from throughout Central and Southeastern Pennsylvania for weekly rehearsals in Lancaster. The Chorale is named for its birthplace in the Wheatland Hills area of Lancaster. The popularity of the Wheatland Chorale has grown steadily. The regular season includes a concert subscription series, performed in Lancaster, Wyomissing and at Elizabethtown College.
         </description>
         <address>
             <street/>

@@ -1,5 +1,5 @@
     <section class="nav-search-form">
-		<h2>Event Search</h2>
+		<h2>Find an Event</h2>
         <form action="/events/search/" class="search-form">
 		    <ul class="search-table" >
 			    <li class="table-label">Keyword, organization or venue:</li>
