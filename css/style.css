@@ -470,14 +470,16 @@ section.event-summaries  {
     text-align: center;
 }
 
-.add-form {
+.add-form,
+.edit-form {
 	margin-left: auto;
 	margin-right: auto;
 	padding: 1em;
 	padding-top: 0;
 }
 
-.add-form input {
+.add-form input,
+.edit-form input {
 	border: 1px solid darkgray;
 	border-radius: 4px;
 	padding: .4em;
@@ -485,7 +487,8 @@ section.event-summaries  {
 	margin-bottom: 1em;
 }
 
-.add-form label {
+.add-form label,
+.edit-form label {
 	font-weight: bold;
 	display: block;
 }
@@ -496,7 +499,8 @@ section.event-summaries  {
 #users_profileedit,
 #organization-add,
 #venue-add,
-#event-add {
+#event-add,
+#venue-edit {
 	background-color: #F0F0F0;
 	border-color: #bbb;
 	border-radius: 5px;
@@ -524,7 +528,8 @@ textarea {
 	font-size: medium;
 }
 
-.add-form textarea {
+.add-form textarea,
+.edit-form textarea {
 	height: 6em;
 	width: 101%;
 	margin-top: .2em;

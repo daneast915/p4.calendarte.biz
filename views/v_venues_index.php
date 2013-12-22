@@ -31,7 +31,14 @@
 				</div>
 				<br/>
 			<?php endif; ?>
-
+    
+            <?php if (isset($error) && strlen($error) > 0): ?>
+                <div class='error'>
+                    <?=$error?>
+                </div>
+                <br/>
+            <?php endif; ?>
+            
             <table id="directory-table" class="pretty">
 	            <thead>
 		            <tr>
@@ -44,7 +51,7 @@
 
                     	<tr>
 							<td>
-						   		<a href="/venues/detail/<?=$venue->id?>"><?=$venue->name?></a>
+						   		<a href="/venues/detail/<?=$venue->venue_id?>"><?=$venue->name?></a>
 						   	</td>
 						   	<td>
 						    	<?=$venue->address->city?>, <?=$venue->address->state?>

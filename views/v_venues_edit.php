@@ -1,9 +1,9 @@
 
-<section id="venue-add">
+<section id="venue-edit">
 	
-	<h2>Add a Venue</h2>
+	<h2>Edit a Venue</h2>
 
-	<form class='add-form' method='POST' action='/venues/add'>
+	<form class='edit-form' method='POST' action='/venues/p_edit'>
 	
 		<?php if (isset($error) && strlen($error) > 0): ?>
 			<div class='error'>
@@ -11,6 +11,8 @@
 			</div>
 			<br/>
 		<?php endif; ?>
+
+		<input type="hidden" name="venue_id" value="<?=$venue->venue_id?>" >
 	
 		<label for='name'>Name *</label>
 		<input type='text' name='name' id='name' class='textbox' autofocus
@@ -114,7 +116,7 @@
 
 		<br>
 	
-		<input type='submit' value='Add' class='button' />
+		<input type='submit' value='Update' class='button' />
 
 	</form>
 

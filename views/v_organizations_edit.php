@@ -2,15 +2,15 @@
 <section id="organization-add">
 	
 	<h2>Edit an Organization</h2>
-
-	<form class='add-form' method='POST' action='/organizations/edit'>
 	
-		<?php if (isset($error) && strlen($error) > 0): ?>
-			<div class='error'>
-				<?=$error?>
-			</div>
-			<br/>
-		<?php endif; ?>
+	<?php if (isset($error) && strlen($error) > 0): ?>
+		<div class='error'>
+			<?=$error?>
+		</div>
+		<br/>
+	<?php endif; ?>
+
+	<form class='edit-form' method='POST' action='/organizations/edit'>
 
 		<input type="hidden" name="organization_id" value="<?=$organization_id?>" >
 			

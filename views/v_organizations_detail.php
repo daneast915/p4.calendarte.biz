@@ -57,28 +57,6 @@
                     <li class="website"><?=$organization->phone?></li>
                     <?php endif; ?>
 
-                    <?php if ($user): ?>
-                        <?php if ($canAddEvent): ?>
-                            <p/>
-                            <div class='add-event-link'>
-                                <form method='POST' action='/events/add'>
-                                    <input type="hidden" name="organization_id" value="<?=$organization->organization_id?>" >
-                                    <input type="hidden" name="from_organization" value="1" >
-                                    <input type='submit' value='Add Event' class='detail-button'/>
-                                </form>
-                            </div>
-                        <?php endif; ?>
-
-                        <?php if ($canUpdateOrganization): ?>
-                            <p/>
-                            <div class='edit-organization-link'>
-                                <form method='POST' action='/organizations/edit'>
-                                    <input type="hidden" name="organization_id" value="<?=$organization->organization_id?>" >
-                                    <input type='submit' value='Edit Organization' class='detail-button'/>
-                                </form>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
                 </ul>
                 <hr class="clearme"/>
 
@@ -91,4 +69,26 @@
                 </section>
             <?php endif; ?>
 
+            <?php if ($user): ?>
+                <?php if ($canAddEvent): ?>
+                    <p/>
+                    <div class='add-event-link'>
+                        <form method='POST' action='/events/add'>
+                            <input type="hidden" name="organization_id" value="<?=$organization->organization_id?>" >
+                            <input type="hidden" name="from_organization" value="1" >
+                            <input type='submit' value='Add Event' class='detail-button'/>
+                        </form>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ($canUpdateOrganization): ?>
+                    <p/>
+                    <div class='edit-organization-link'>
+                        <form method='POST' action='/organizations/edit'>
+                            <input type="hidden" name="organization_id" value="<?=$organization->organization_id?>" >
+                            <input type='submit' value='Edit Organization' class='detail-button'/>
+                        </form>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>

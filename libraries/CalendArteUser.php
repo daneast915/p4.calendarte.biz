@@ -328,8 +328,22 @@ class CalendArteUser extends User {
 	@return cleansed string
 	-------------------------------------------------------------------------------------------------*/
 	public function cleanse_data ($data) {
-	
-		return htmlentities(stripslashes(nl2br($data)),ENT_QUOTES,"Utf-8");
+
+		if(is_array($data)){
+		
+			foreach($data as $k => $v){
+				if(is_array($v)){
+					$data[$k] = self::cleanse_data($v);
+				} else {
+					$data[$k] = htmlentities(stripslashes(nl2br($v)),ENT_QUOTES,"Utf-8");
+				}
+			}
+			
+		} else {
+			$data = htmlentities(stripslashes(nl2br($data)),ENT_QUOTES,"Utf-8");
+		}
+
+		return $data;
 					
 	}
 

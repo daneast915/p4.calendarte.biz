@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 21, 2013 at 07:11 PM
+-- Generation Time: Dec 22, 2013 at 02:16 AM
 -- Server version: 5.5.33
 -- PHP Version: 5.5.3
 
@@ -13,6 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `calendar_p4_calendarte_biz`
 --
+CREATE DATABASE IF NOT EXISTS `calendar_p4_calendarte_biz` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `calendar_p4_calendarte_biz`;
 
 -- --------------------------------------------------------
 
@@ -20,7 +22,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `events`
 --
 
-CREATE TABLE `events` (
+CREATE TABLE IF NOT EXISTS `events` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -44,7 +46,7 @@ CREATE TABLE `events` (
 -- Table structure for table `organizations`
 --
 
-CREATE TABLE `organizations` (
+CREATE TABLE IF NOT EXISTS `organizations` (
   `organization_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -82,7 +84,7 @@ INSERT INTO `organizations` (`organization_id`, `created`, `modified`, `user_id`
 -- Table structure for table `shows`
 --
 
-CREATE TABLE `shows` (
+CREATE TABLE IF NOT EXISTS `shows` (
   `show_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -102,7 +104,7 @@ CREATE TABLE `shows` (
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -123,7 +125,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `created`, `modified`, `token`, `password`, `last_login`, `timezone`, `first_name`, `last_name`, `email`, `avatar`) VALUES
 (31, 1387127998, 1387158892, '49325bb0a4f3ef2bf1328174ab57573b43d0d4fb', '09e08f67de901dca540b5c52035a484af07c9aac', 1387158798, '', 'Dan', 'East', 'daneast915@gmail.com', ''),
-(33, 1387238196, 1387238196, 'f984bc5294c1e735c6a2651955f1d249b21882df', 'e9bee8ed7da539ed6457914f757756b8b07730f3', 1387648833, '', 'Admin', 'Admin', 'admin@fake.org', '');
+(33, 1387238196, 1387238196, '2bebc675dbeb06733c4bc55f0386f3b7763ebc7a', 'e9bee8ed7da539ed6457914f757756b8b07730f3', 1387674892, '', 'Admin', 'Admin', 'admin@fake.org', '');
 
 -- --------------------------------------------------------
 
@@ -131,7 +133,7 @@ INSERT INTO `users` (`user_id`, `created`, `modified`, `token`, `password`, `las
 -- Table structure for table `venues`
 --
 
-CREATE TABLE `venues` (
+CREATE TABLE IF NOT EXISTS `venues` (
   `venue_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -146,20 +148,21 @@ CREATE TABLE `venues` (
   `phone` varchar(64) NOT NULL,
   `email` varchar(255) NOT NULL,
   `website` varchar(255) NOT NULL,
-  `seating_chart` varchar(255) NOT NULL,
+  `seating_info` varchar(255) NOT NULL,
   `parking_info` varchar(255) NOT NULL,
   `accessibility_info` varchar(255) NOT NULL,
   `image_url` varchar(255) NOT NULL,
   PRIMARY KEY (`venue_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `venues`
 --
 
-INSERT INTO `venues` (`venue_id`, `created`, `modified`, `user_id`, `name`, `description`, `address_street`, `address_box`, `address_city`, `address_state`, `address_zipcode`, `phone`, `email`, `website`, `seating_chart`, `parking_info`, `accessibility_info`, `image_url`) VALUES
+INSERT INTO `venues` (`venue_id`, `created`, `modified`, `user_id`, `name`, `description`, `address_street`, `address_box`, `address_city`, `address_state`, `address_zipcode`, `phone`, `email`, `website`, `seating_info`, `parking_info`, `accessibility_info`, `image_url`) VALUES
 (1, 1387326634, 1387326634, 33, 'Ware Center', 'Lancaster&#039;s new visual and performing arts center located in the heart of the arts and historic district! There is something for everyone in Lancaster, and The Ware Center of Millersville University Lancaster captures a little of everything. From art to cabaret to music, we have an event series or two that you will love! Stunning new, architecturally important facility with a two-story, glass enclosed lobby space, acoustically-perfect performance space with stadium seating and Ville in the Sky -- a music cafe overlooking the city of Lancaster.', '42 N. Prince Street', '', 'Lancaster', 'PA', '17603', '717-871-2308', 'warecenterinfo@millersville.edu', 'http://www.millersville.edu/muarts/venues/ware-center', '', '', '', 'http://www.lancasterarts.com/Uploads/images/LancasterARTS/Sponsors-website/WareCentr408w.jpg'),
 (2, 1387419377, 1387419377, 33, 'Lancaster Church of the Brethren', '', '1601 Sunset Ave.', '', 'Lancaster', 'PA', '17603', '717-397-4751', 'info@lancob.org', 'http://www.lancob.org', '', '', '', 'http://lancob.org/site/wp-content/uploads/2011/12/HomePage_Banner1-copy.jpg'),
 (3, 1387419807, 1387419807, 33, 'First Presbyterian Church', '', '140 E. Orange St.', '', 'Lancaster', 'PA', '17603', '717-394-6854', 'info@fpclive.org', 'http://www.fpclive.org', '', '', '', ''),
 (4, 1387643114, 1387643114, 33, 'Long&#039;s Park', 'Long&rsquo;s Park is a 80-acre park located northwest of Lancaster City at the intersection of Harrisburg Pike and the Route 30 Bypass. Picnic pavilions and tables dot the park along with a petting farm, children&#039;s playgrounds, a two-acre, spring-fed lake, tennis courts and a fitness trail.', '1441 Harrisburg Pike', '', 'Lancaster', 'PA', '17603', '717-735-8883', 'info@longspark.org', 'http://www.longspark.org', '', '', '', 'http://allegrochamberorchestra.org/wp/wp-content/uploads/2013/04/Longs-Park-with-crowd-300x205.jpg'),
-(5, 1387643325, 1387643325, 33, 'Barshinger Center', 'The Barshinger Center provides a world-class, 500-seat concert hall to serve as the centerpiece of Franklin and Marshall&#039;s thriving music program.', '615 College Avenue', '', 'Lancaster', 'PA', '17603', '717-735-8883', 'info@fandm.edu', 'http://www.fandm.edu/directory/building/259', '', '', '', 'http://allegrochamberorchestra.org/wp/wp-content/uploads/2013/04/barshinger-outside.jpg');
+(5, 1387643325, 1387643325, 33, 'Barshinger Center', 'The Barshinger Center provides a world-class, 500-seat concert hall to serve as the centerpiece of Franklin and Marshall&#039;s thriving music program.', '615 College Avenue', '', 'Lancaster', 'PA', '17603', '717-735-8883', 'info@fandm.edu', 'http://www.fandm.edu/directory/building/259', '', '', '', 'http://allegrochamberorchestra.org/wp/wp-content/uploads/2013/04/barshinger-outside.jpg'),
+(7, 1387671806, 1387674904, 33, 'Fulton Theatre / Opera House', 'Central Pennsylvania&#039;s premier regional theatre and National Historic Landmark combines Broadway caliber musicals, comedies and dramas with the grandeur of ornate Victorian architecture. The Fulton first opened its doors in 1852. Almost 160 years later, this National Historic Landmark Theatre continues to entertain, educate and delight audiences, bringing live theatre, music, and more than 100,000 patrons into downtown Lancaster annually. Since its inception, some of the brightest stars of theatre, music and film have appeared on its stage. Today, under the leadership of Artistic Director Marc Robin and Managing Director Aaron A. Young, the Fulton Theatre produces a mix of comedies, dramas and musicals, employing the talents of professional directors, designers, playwrights and actors from the local community, New York and across the country.', '12 North Prince Street', '', 'Lancaster', 'PA', '17603', '717-397-7425', 'info@fulton.org', 'http://www.thefulton.org', '', '', '', 'http://www.bam.org/media/261845/2012_Visit%20_Opera%20House%20_305x171.jpg');

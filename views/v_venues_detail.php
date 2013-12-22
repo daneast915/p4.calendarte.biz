@@ -21,12 +21,12 @@
 
             <!-- Detail -->
             <h2 class="before-detail">Venue</h2>
-
+            
             <section class="detail-section">
                 <ul>
                     <li class="image">
                         <div class="image-div">
-                            <img src="<?=$venue->firstImage?>" alt="" />
+                            <img src="<?=$venue->image_url?>" alt="" />
                         </div>
                     </li>
                     
@@ -55,13 +55,25 @@
                     <li class="phone"><?=$venue->phone?></li>
                     <?php endif; ?>
 
-                    <?php if ($venue->accessibilityInfo): ?>
+                    <?php if ($venue->accessibility_info): ?>
                     <li class="label">Accessibility Information</li>
-                    <li class="accessibility-info"><?=$venue->accessibilityInfo?></li>
+                    <li class="accessibility-info"><?=$venue->accessibility_info?></li>
                     <?php endif; ?>
                 </ul>
                 <hr class="clearme"/>
             </section>
+
+            <?php if ($user): ?>
+                <?php if ($canUpdateVenue): ?>
+                    <p/>
+                    <div class='edit-link'>
+                        <form method='POST' action='/venues/edit'>
+                            <input type="hidden" name="venue_id" value="<?=$venue->venue_id?>" >
+                            <input type='submit' value='Edit Venue' class='detail-button'/>
+                        </form>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        
         </div>
 
-</section>
