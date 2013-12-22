@@ -32,14 +32,15 @@ class index_controller extends base_controller {
 		    $organizationsXML = getOrganizations();
 
 		    # Build list of events
-		    $i = 0;            
+		    $i = 0;        
+		    $results = array();    
 		    foreach ($eventsXML->event as $eventXML)
 			    {
 		        $eventInstance = new Event();
 		        $eventInstance->populateFromXML ($eventXML, $organizationsXML);
 		        $eventInstance->populateShowsFromXML ($eventsXML, $organizationsXML, $showsXML, $venuesXML);
 		        
-		        if ($eventInstance->topPick)
+		        if ($eventInstance->top_pick)
 		            $results[$i++] = $eventInstance;
 		        }
 

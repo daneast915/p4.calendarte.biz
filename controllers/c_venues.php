@@ -68,10 +68,9 @@ class venues_controller extends base_controller {
 			$this->template->title   = "Venue";	
 			$this->template->body_id = "venues";
 
-            if ($this->user) {
-            	$this->template->content->canUpdateVenue = ($this->user->user_id == $venue->user_id);
-            }
-
+            $canEdit = ($this->user && $this->user->user_id == $venue->user_id);
+            $this->template->content->canUpdateVenue = $canEdit;
+ 
 			# Render the View
 		    $this->template->content->venue = $venue;
 			echo $this->template;
@@ -80,6 +79,47 @@ class venues_controller extends base_controller {
             echo 'Venue with id ' . $id . ' not found.' . PHP_EOL;
         }
     }    
+
+ 	/*-------------------------------------------------------------------------------------------------
+	Validates $POST data for Add / Edit
+	-------------------------------------------------------------------------------------------------*/
+    private function validateAddEditPostData (&$post_data, &$errorMessage) {
+
+    	$error = false;
+    	
+		# Array for field names
+		$field_names = Array(
+			"name" => "Name",
+			"address_street" => "Street",
+			"address_city" => "City",
+			"address_state" => "State",
+			"address_zipcode" => "Zip Code",
+			"email" => "Email Address",
+			"website" => "Website"
+			);
+		
+		# Loop through the POST data to validate
+		foreach($post_data as $field_name => $value) {
+			# If a field is blank, add a message
+			if ($value == "" && isset($field_names[$field_name])) {
+				$errorMessage .= $field_names[$field_name].' must contain a value.<br/>';
+				$error = true;
+			}
+		}
+		
+		$email = $post_data['email'];
+		
+		# Validate the email address for format and uniqueness
+		$email_error = $this->userObj->validate_email ($email);
+
+		if (!empty($email_error)) {
+			$errorMessage .= $email_error;
+			$post_data['email'] = '';
+			$error = true;
+		}
+
+		return $error;   	
+    }
 
  	/*-------------------------------------------------------------------------------------------------
 	organizations/add controller method
@@ -108,46 +148,19 @@ class venues_controller extends base_controller {
 		$venue->populateFromPostData ($_POST);
 
 		# Innocent until proven guilty
-		$error = false;
+		$errorMessage = '';
 		$this->template->content->error = '';
 
-		# Array for field names
-		$field_names = Array(
-			"name" => "Name",
-			"address_street" => "Street",
-			"address_city" => "City",
-			"address_state" => "State",
-			"address_zipcode" => "Zip Code",
-			"email" => "Email Address",
-			"website" => "Website"
-			);
-		
-		# Loop through the POST data to validate
-		foreach($_POST as $field_name => $value) {
-			# If a field is blank, add a message
-			if ($value == "" && isset($field_names[$field_name])) {
-				$this->template->content->error .= $field_names[$field_name].' must contain a value.<br/>';
-				$error = true;
-			}
-		}
-		
-		$email = $_POST['email'];
-		
-		# Validate the email address for format and uniqueness
-		$email_error = $this->userObj->validate_email ($email);
-		if (!empty($email_error)) {
-			$this->template->content->error .= $email_error;
-			$email = '';
-			$error = true;
-		}
+		$error = $this->validateAddEditPostData ($_POST, $errorMessage);
 
 		# If any errors, display the page with the errors
 		if ($error) {
-			$venue->email = $email;
-			//print_r($venue);
+			$venue->email = $_POST['email'];
 
+			$this->template->content->error = $errorMessage;
 			$this->template->content->venue = $venue;
 			echo $this->template;
+
 			return;
 		}
 		
@@ -211,45 +224,19 @@ class venues_controller extends base_controller {
 		$venue->populateFromPostData ($_POST);
 
 		# Innocent until proven guilty
-		$error = false;
+		$errorMessage = '';
 		$this->template->content->error = '';
 
-		# Array for field names
-		$field_names = Array(
-			"name" => "Name",
-			"address_street" => "Street",
-			"address_city" => "City",
-			"address_state" => "State",
-			"address_zipcode" => "Zip Code",
-			"email" => "Email Address",
-			"website" => "Website"
-			);
-		
-		# Loop through the POST data to validate
-		foreach($_POST as $field_name => $value) {
-			# If a field is blank, add a message
-			if ($value == "" && isset($field_names[$field_name])) {
-				$this->template->content->error .= $field_names[$field_name].' must contain a value.<br/>';
-				$error = true;
-			}
-		}
-		
-		$email = $_POST['email'];
-		
-		# Validate the email address for format and uniqueness
-		$email_error = $this->userObj->validate_email ($email);
-		if (!empty($email_error)) {
-			$this->template->content->error .= $email_error;
-			$email = '';
-			$error = true;
-		}
+		$error = $this->validateAddEditPostData ($_POST, $errorMessage);
 
 		# If any errors, display the page with the errors
 		if ($error) {
-			$venue->email = $email;
+			$venue->email = $_POST['email'];
 
+			$this->template->content->error = $errorMessage;
 			$this->template->content->venue = $venue;
 			echo $this->template;
+
 			return;
 		}
 		
@@ -258,11 +245,9 @@ class venues_controller extends base_controller {
 
 		# Cleanse the data
 		$_POST = $this->userObj->cleanse_data($_POST);
-		//print_r($_POST);
     
 		# Update this venue in the database
 		$venue->populateFromPostData ($_POST);
-		//print_r($venue);
 		$venue->updateToDb ($this->user->user_id);
 
 		# Send them to the login screen

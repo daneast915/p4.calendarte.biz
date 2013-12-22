@@ -35,21 +35,17 @@ class organizations_controller extends base_controller {
 				case 2:
 					$this->template->content->message = "Your organization was deleted.<br/>";
 					break;
+				case 3:
+					$this->template->content->error = "Unable to delete organization.<br/>";
+					break;
 			}
 		}
 
-	    $organizationsXML = getOrganizations();
 
-	    $i = 0;            
-	    foreach ($organizationsXML->organization as $organizationXML) {
-	        $organization = new Organization();
-	        $organization->populateFromXML($organizationXML);
-
-			$results[$i++] = $organization;
-	    }
+	    $organizations = Organization::arrayFromDb();
 
 		# Render the View
-	    $this->template->content->organizations = $results;
+	    $this->template->content->organizations = $organizations;
 		echo $this->template;	
 		
 	}
@@ -63,23 +59,15 @@ class organizations_controller extends base_controller {
     		Router::redirect("/organizations/index");
     	}
 
-	    $organizationsXML = getOrganizations();    
-	    $eventsXML = getEvents();
-	    $showsXML  = getShows();
-	    $venuesXML = getVenues();
-	    
-        $organizationXML = findOrganization($organizationsXML, $id);
-	
-	    if (isset($organizationXML)) {
+   		$organization = new Organization();
+   		$row = $organization->findInDb($id);
+
+	    if (isset($row)) {
             
 	 		# Setup the View
 			$this->template->content = View::instance("v_organizations_detail");
 			$this->template->title   = "Organization";	
 			$this->template->body_id = "organizations";
-
-            $organization = new Organization();
-            $organization->populateFromXML ($organizationXML);
-            $organization->populateEventsFromXML ($eventsXML, $organizationsXML, $showsXML, $venuesXML);
 
             if (isset($organization->events) && count($organization->events) > 0) {    
 			    # Nest View for Events List
@@ -88,8 +76,9 @@ class organizations_controller extends base_controller {
 				$this->template->content->events = $eventsView;
             }
 
-			$this->template->content->canAddEvent = true;
-			$this->template->content->canUpdateOrganization = true;
+            $canEdit = ($this->user && $this->user->user_id == $organization->user_id);
+			$this->template->content->canAddEvent = $canEdit;
+			$this->template->content->canUpdateOrganization = $canEdit;
 
 			# Render the View
 		    $this->template->content->organization = $organization;
@@ -99,6 +88,51 @@ class organizations_controller extends base_controller {
             echo 'Organization with id ' . $id . ' not found.' . PHP_EOL;
         }
     }    
+
+ 	/*-------------------------------------------------------------------------------------------------
+	Validates $POST data for Add / Edit
+	-------------------------------------------------------------------------------------------------*/
+    private function validateAddEditPostData (&$post_data, &$errorMessage) {
+
+    	$error = false;
+
+		
+		# Array for field names
+		$field_names = Array(
+			"name" => "Name",
+			"description" => "Description",
+			"director" => "Director",
+			"address_street" => "Street",
+			"address_city" => "City",
+			"address_state" => "State",
+			"address_zipcode" => "Zip Code",
+			"website" => "Website",
+			"image_url" => "Image"
+			);
+		
+		# Loop through the POST data to validate
+		foreach($post_data as $field_name => $value) {
+			# If a field is blank, add a message
+			if ($value == "" && isset($field_names[$field_name])) {
+				$errorMessage .= $field_names[$field_name].' must contain a value.<br/>';
+				$error = true;
+			}
+
+		}
+		
+		$email = $post_data['email'];
+		
+		# Validate the email address for format and uniqueness
+		$email_error = $this->userObj->validate_email ($email);
+
+		if (!empty($email_error)) {
+			$errorMessage .= $email_error;
+			$post_data['email'] = '';
+			$error = true;
+		}
+
+    	return $error;
+    }
 
  	/*-------------------------------------------------------------------------------------------------
 	organizations/add controller method
@@ -115,113 +149,47 @@ class organizations_controller extends base_controller {
 
         # Render template
 		if (!$_POST) {
-			$this->template->content->name = '';
-			$this->template->content->description = '';
-			$this->template->content->director = '';
-			$this->template->content->email = '';
-			$this->template->content->phone = '';
-			$this->template->content->website = '';
-			$this->template->content->image_url = '';
+			$organization = new Organization();
+			$this->template->content->organization = $organization;
 
         	echo $this->template;
 			return;
     	}
+
+		# Transfer POST data to Organization object
+		$organization = new Organization();
+		$organization->populateFromPostData ($_POST);
+
+		# Innocent until proven guilty
+		$errorMessage = '';
+		$this->template->content->error = '';
+
+		$error = $this->validateAddEditPostData ($_POST, $errorMessage);
+
+		# If any errors, display the page with the errors
+		if ($error) {
+			$organization->email = $_POST['email'];
+
+			$this->template->content->error = $errorMessage;
+			$this->template->content->organization = $organization;
+			echo $this->template;
+
+			return;
+		}
 		
  		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
-		# Innocent until proven guilty
-		$error = false;
-		$this->template->content->error = '';
-		
-		# Array for field names
-		$field_names = Array(
-			"name" => "Name",
-			"description" => "Description",
-			"director" => "Director",
-			/*---
-			"address_street" => "Street",
-			"address_city" => "City",
-			"address_state" => "State",
-			"address_zipcode" => "Zip Code",
-			---*/
-			"phone" => "Phone",
-			"email" => "Email Address",
-			"website" => "Website",
-			"image_url" => "Image"
-			);
-		
-		# Loop through the POST data to validate
-		foreach($_POST as $field_name => $value) {
-			# Sanitize the data
-			$_POST[$field_name] = $this->userObj->cleanse_data ($_POST[$field_name]);
-
-			# If a field is blank, add a message
-			if ($value == "") {
-				$this->template->content->error .= $field_names[$field_name].' must contain a value.<br/>';
-				$error = true;
-			}
-			
-			# If a field contains invalid characters, add a message
-			/*---
-			if ($this->userObj->check_for_invalid_chars ($value))  {
-				$this->template->content->error .= $field_names[$field_name].' contains invalid characters.<br/>';
-				$_POST[$field_name] = '';
-				$error = true;				
-			}
-			---*/
-		}
-		
-		$email = $_POST['email'];
-		
-		# Validate the email address for format and uniqueness
-		$email_error = $this->userObj->validate_email ($email);
-		if (!empty($email_error)) {
-			$this->template->content->error .= $email_error;
-			$email = '';
-			$error = true;
-		}
-
-		# If any errors, display the page with the errors
-		if ($error) {
-			$this->template->content->name = $_POST['name'];
-			$this->template->content->description = $_POST['description'];
-			$this->template->content->director = $_POST['director'];
-			$this->template->content->website = $_POST['website'];
-			$this->template->content->phone = $_POST['phone'];
-			$this->template->content->image_url = $_POST['image_url'];
-			
-			$this->template->content->email = $email;
-
-			echo $this->template;
-			return;
-		}
-	
-		# More data we want stored with the user
-		$_POST['created']  = Time::now();
-		$_POST['modified'] = Time::now();
+		# Cleanse the data
+		$_POST = $this->userObj->cleanse_data($_POST);
     
 		# Insert this organization into the database
-		$this->userObj->add_organization ($this->user->user_id, $_POST);
+		$organization->populateFromPostData ($_POST);
+		$organization->addToDb ($this->user->user_id);
 
 		# Send them to the login screen
 		Router::redirect('/organizations/index/1'); 
     }
-	
-	/*-------------------------------------------------------------------------------------------------
-	organizations/delete controller method
-	-------------------------------------------------------------------------------------------------*/
-	public function delete() {
-
-   		if (!$this->user)
-    		Router::redirect('/organizations/index');
-
-		# Delete this post
-		$this->userObj->delete_organization ($this->user->user_id, $_POST['organization_id']);
-			
-		# Send them back
-		Router::redirect("/organizations/index/2");	
-	}
 
  	/*-------------------------------------------------------------------------------------------------
 	organizations/edit controller method
@@ -233,108 +201,102 @@ class organizations_controller extends base_controller {
 
     	$organization_id = $_POST['organization_id'];
 
-    	$organization = findOrganization ($organization_id);
+		# Transfer POST data to Organization object
+		$organization = new Organization();
+		$organization->findInDb ($organization_id);
 
-		# Setup view
-		$content = View::instance('v_organizations_edit');
-
-		$content->$organization_id = $organization->$organization_id;
-		$content->name = $organization->name;
-		$content->description = $organization->description;
-		$content->director = $organization->director;
-		$content->website = $organization->website;
-		$content->phone = $organization->phone;
-		$content->image_url = $organization->image_url;
-		$content->email = $organization->email;
-		
-		$this->template->content = $content;
-		$this->template->title = 'Edit Organization';
+        # Setup view
+		$this->template->content = View::instance('v_organizations_edit');
+		$this->template->title   = "Edit Organization";
 		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
-	
-		if (!$_POST) {
+
+		$this->template->content->organization = $organization;
+
+    	echo $this->template;
+    }
+
+ 	/*-------------------------------------------------------------------------------------------------
+	organizations/p_edit controller method
+	-------------------------------------------------------------------------------------------------*/
+   	public function p_edit() {
+
+   		if (!$this->user || !$_POST)
+    		Router::redirect('/organizations/index');
+
+    	$organization_id = $_POST['organization_id'];
+
+        # Setup view
+		$this->template->content = View::instance('v_organizations_edit');
+		$this->template->title   = "Edit Organization";
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
+
+		# Transfer POST data to Organization object
+		$organization = new Organization();
+		$organization->findInDb ($organization_id);
+		$organization->populateFromPostData ($_POST);
+
+		# Innocent until proven guilty
+		$errorMessage = '';
+		$this->template->content->error = '';
+
+		$error = $this->validateAddEditPostData ($_POST, $errorMessage);
+
+		# If any errors, display the page with the errors
+		if ($error) {
+			$organization->email = $_POST['email'];
+
+			$this->template->content->error = $errorMessage;
+			$this->template->content->organization = $organization;
 			echo $this->template;
+
 			return;
 		}
 		
  		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
-		
-		# Innocent until proven guilty
-		$error = false;
-		$this->template->content->error = '';
-		
-		# Array for field names
-		$field_names = Array(
-			"name" => "Name",
-			"description" => "Description",
-			"director" => "Director",
-			/*---
-			"address_street" => "Street",
-			"address_city" => "City",
-			"address_state" => "State",
-			"address_zipcode" => "Zip Code",
-			---*/
-			"phone" => "Phone",
-			"email" => "Email Address",
-			"website" => "Website",
-			"image_url" => "Image"
-			);
-					
-		# Loop through the POST data to validate
-		foreach($_POST as $field_name => $value) {
-			# If a field is blank, add a message
-			if ($value == "") {
-				$this->template->content->error .= $field_names[$field_name].' must contain a value.<br/>';
-				$error = true;				
-			}
-			
-			if ($this->userObj->check_for_invalid_chars ($value))  {
-				$this->template->content->error .= $field_names[$field_name].' contains invalid characters.<br/>';
-				$_POST[$field_name] = '';
-				$error = true;				
-			}
-		}
-		
-		# Sanitize the fields
-		$_POST['name'] = $this->userObj->cleanse_data ($_POST['name']);
-		
-		$email = $_POST['email'];
 
-		# Validate the email address for format and uniqueness
-		$email_error = $this->userObj->validate_email ($email, FALSE);
-		if (!empty($email_error)) {
-			$this->template->content->error .= $email_error;
-			$email = '';
-			$error = true;
-		}
-		
-		if (!empty($email) && $email != $this->user->email) {
-			if (!$this->confirm_unique_email($email)) {
-				$this->template->content->error .=  "Email has already been used. Please use another.<br/>";
-				$email = '';
-				$error = true;
-			}
-		}
+		# Cleanse the data
+		$_POST = $this->userObj->cleanse_data($_POST);
+    
+		# Update this organization in the database
+		$organization->populateFromPostData ($_POST);
+		$organization->updateToDb ($this->user->user_id);
 
-		# If any errors, display the page with the errors
-		if ($error) {
-			$this->template->content->name = $_POST['name'];
-			$this->template->content->email = $email;
-			
-			echo $this->template;
-			return;
-		}
+		# Send them to the login screen
+		Router::redirect('/organizations/detail/'.$organization->organization_id); 
 		
-		# Passed validation
-
-		# More data we want stored with the user
-		$_POST['modified'] = Time::now();
-		
-		# Do the update
-		$this->userObj->update_organization ($organization_id, $_POST);
-		   
-		# Send them back to the profile page.
-		Router::redirect("/organizations/detail/".$organization_id);
     }
+
+	/*-------------------------------------------------------------------------------------------------
+	organizations/delete controller method
+	-------------------------------------------------------------------------------------------------*/
+	public function delete() {
+
+   		if (!$this->user)
+    		Router::redirect('/organizations/index');
+	
+		# Delete this organization
+		$organization = new Organization();
+   		$row = $organization->findInDb($_POST['organization_id']);
+
+   		$error = 0;
+
+	    if (isset($row)) {		
+	    	if ($organization->deleteFromDb ($this->user->user_id)) {
+				# Send them to the index
+				Router::redirect("/organizations/index/2");	
+			}
+			else {
+				$error = 3;
+			}
+		}
+		else {
+			$error = 3;
+		}
+
+		# Send them back to index
+		Router::redirect("/organizations/index/".$error);
+
+	}
 	
 } # end of the class
