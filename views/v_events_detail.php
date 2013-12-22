@@ -25,7 +25,7 @@
                 <ul>
                     <li class="image">
                         <div class="image-div">
-                            <img src="<?=$event->firstImage?>" alt="" />
+                            <img src="<?=$event->image_url?>" alt="" />
                         </div>
                     </li>
 
@@ -38,9 +38,9 @@
 
                     <li class="description"><?=$event->description?></li>
 
-                    <?php if ($event->admissionInfo): ?>
+                    <?php if ($event->admission_info): ?>
                     <li class="label">Admission Information</li>
-                    <li class="admission-info"><?=$event->admissionInfo?></li>
+                    <li class="admission-info"><?=$event->admission_info?></li>
                     <?php endif; ?>
 
                     <?php if ($event->website): ?>
@@ -78,7 +78,7 @@
                                 <?=$show->shortDay?>, <?=$show->shortDate?> - <?=$show->timeOfDay?>
                             </td>
                             <td class="location">
-                                <a href="/venues/detail/<?=$show->venue->id?>"><?=$show->venue->name?></a>
+                                <a href="/venues/detail/<?=$show->venue->venue_id?>"><?=$show->venue->name?></a>
                             </td>
                         </tr>
 

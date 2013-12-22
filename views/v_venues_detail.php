@@ -20,8 +20,23 @@
             <!-- end breadcrumb navigation -->             
 
             <!-- Detail -->
+
+            <?php if ($user): ?>
+                <?php if ($canUpdateVenue): ?>
+                    <p/>
+                    <div class='edit-link'>
+                        <form method='POST' action='/venues/edit'>
+                            <input type="hidden" name="venue_id" value="<?=$venue->venue_id?>" >
+                            <input type='submit' value='Edit Venue' class='detail-button'/>
+                        </form>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+
             <h2 class="before-detail">Venue</h2>
-            
+
+            <hr class="clearme"/>
+                        
             <section class="detail-section">
                 <ul>
                     <li class="image">
@@ -62,18 +77,6 @@
                 </ul>
                 <hr class="clearme"/>
             </section>
-
-            <?php if ($user): ?>
-                <?php if ($canUpdateVenue): ?>
-                    <p/>
-                    <div class='edit-link'>
-                        <form method='POST' action='/venues/edit'>
-                            <input type="hidden" name="venue_id" value="<?=$venue->venue_id?>" >
-                            <input type='submit' value='Edit Venue' class='detail-button'/>
-                        </form>
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
         
         </div>
 

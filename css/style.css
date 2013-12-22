@@ -571,9 +571,12 @@ textarea {
 	height: 1.5em;
 }
 
-
 .add-link {
 	float: right;
 	margin-top: 1em;
-	margin-right: 1em;
 }
+
+.edit-link {
+	float: right;
+}
+

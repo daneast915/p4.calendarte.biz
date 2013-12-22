@@ -45,7 +45,7 @@
 
                     	<tr>
 							<td>
-						   		<a href="/organizations/detail/<?=$organization->id?>"><?=$organization->name?></a>
+						   		<a href="/organizations/detail/<?=$organization->organization_id?>"><?=$organization->name?></a>
 						   	</td>
 						   	<td>
 						    	<?=$organization->address->city?>, <?=$organization->address->state?>

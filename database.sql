@@ -13,7 +13,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `calendar_p4_calendarte_biz`
 --
-CREATE DATABASE IF NOT EXISTS `calendar_p4_calendarte_biz` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+-- CREATE DATABASE IF NOT EXISTS `calendar_p4_calendarte_biz` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `calendar_p4_calendarte_biz`;
 
 -- --------------------------------------------------------
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `admission_info` varchar(255) NOT NULL,
   PRIMARY KEY (`event_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `organizations` (
   `image_url` varchar(255) NOT NULL,
   PRIMARY KEY (`organization_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `organizations`
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `shows` (
   KEY `user_id` (`user_id`),
   KEY `event_id` (`event_id`),
   KEY `venue_id` (`venue_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
+)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `users`
@@ -153,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `venues` (
   `accessibility_info` varchar(255) NOT NULL,
   `image_url` varchar(255) NOT NULL,
   PRIMARY KEY (`venue_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+)  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `venues`

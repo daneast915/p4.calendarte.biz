@@ -19,7 +19,7 @@ class Address {
     }
     
     function populateFromAssocData ($assoc_data) {
-        $this->street = $assoc_data['address_street'];
+        $this->street = isset($assoc_data['address_street']) ? $assoc_data['address_street'] : '';
         $this->box = isset($assoc_data['address_box']) ? $assoc_data['address_box'] : '';
         $this->city = $assoc_data['address_city'];
         $this->state = $assoc_data['address_state'];

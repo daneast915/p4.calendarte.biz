@@ -31,6 +31,7 @@ class Venue {
     Venue constructor
     -------------------------------------------------------------------------------------------------*/
     public function Venue () {
+
         $this->venue_id = 0;
         $this->created = 0;
         $this->modified = 0;
@@ -51,6 +52,7 @@ class Venue {
     Populates a Venue from XML (for testing)
     -------------------------------------------------------------------------------------------------*/
     public function populateFromXML ($venueXML) {
+
         $this->venue_id = $venueXML->id;
         $this->name = $venueXML->name;
         $this->description = $venueXML->description;
@@ -62,7 +64,7 @@ class Venue {
         $this->accessibility_info = !empty($venueXML->accessibilityinfo) ? $venueXML->accessibilityinfo : NULL;
 
         $i = 0;
-        $this->firstImage = NULL;
+        $this->image_url = NULL;
         
         if (isset ($venueXML->images)) {
             foreach ($venueXML->images as $imageXML) {
@@ -96,10 +98,11 @@ class Venue {
     Populates a Venue from a database row
     -------------------------------------------------------------------------------------------------*/
     public function populateFromDb ($db_row) {
+
         $this->populateFromAssocData ($db_row);
 
         $this->created = $db_row['created'];
-        $this->modified = $db_row['created'];
+        $this->modified = $db_row['modified'];
         $this->user_id = $db_row['user_id'];
     }
     
@@ -107,6 +110,7 @@ class Venue {
     Populates a Venue from POST data from a Form
     -------------------------------------------------------------------------------------------------*/
     public function populateFromPostData ($post_data) {
+
         $this->populateFromAssocData ($post_data);
     }
 
@@ -114,6 +118,7 @@ class Venue {
     Finds a populates a Venue from a venue_id
     -------------------------------------------------------------------------------------------------*/
     public function findInDb ($venue_id) {
+        
         $q = 'SELECT * 
               FROM venues 
               WHERE venue_id = '.$venue_id;
@@ -138,7 +143,6 @@ class Venue {
             $q += " ".$condition;
               
         # Execute the query to get all the venues.
-        # Store the result array in the variable $users
         $venue_rows = DB::instance(DB_NAME)->select_rows($q);
 
         $venues = array();
@@ -222,8 +226,8 @@ class Venue {
             return 0;
         }
 
-        # Delete the venue from the posts table
-        $q = 'WHERE venue_id = '.$this->venue_id;
+        # Delete the venue from the venues table
+        $q = "WHERE venue_id = '".$this->venue_id."'";
         return DB::instance(DB_NAME)->delete('venues', $q);
     
     }
