@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 23, 2013 at 05:32 AM
+-- Generation Time: Dec 23, 2013 at 05:42 AM
 -- Server version: 5.5.33
 -- PHP Version: 5.5.3
 
@@ -28,7 +28,8 @@ USE `calendar_p4_calendarte_biz`;
 -- Table structure for table `events`
 --
 
-CREATE TABLE `events` (
+DROP TABLE IF EXISTS `events`;
+CREATE TABLE IF NOT EXISTS `events` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -71,7 +72,8 @@ INSERT INTO `events` (`event_id`, `created`, `modified`, `user_id`, `organizatio
 -- Table structure for table `organizations`
 --
 
-CREATE TABLE `organizations` (
+DROP TABLE IF EXISTS `organizations`;
+CREATE TABLE IF NOT EXISTS `organizations` (
   `organization_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -114,7 +116,8 @@ INSERT INTO `organizations` (`organization_id`, `created`, `modified`, `user_id`
 -- Table structure for table `shows`
 --
 
-CREATE TABLE `shows` (
+DROP TABLE IF EXISTS `shows`;
+CREATE TABLE IF NOT EXISTS `shows` (
   `show_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -163,7 +166,8 @@ INSERT INTO `shows` (`show_id`, `created`, `modified`, `user_id`, `event_id`, `v
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
@@ -192,7 +196,8 @@ INSERT INTO `users` (`user_id`, `created`, `modified`, `token`, `password`, `las
 -- Table structure for table `venues`
 --
 
-CREATE TABLE `venues` (
+DROP TABLE IF EXISTS `venues`;
+CREATE TABLE IF NOT EXISTS `venues` (
   `venue_id` int(11) NOT NULL AUTO_INCREMENT,
   `created` int(11) NOT NULL,
   `modified` int(11) NOT NULL,
