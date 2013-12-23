@@ -83,7 +83,7 @@
 
             <?php if ($canAddEvent): ?>
                 <p/>
-                <div class='add-event-link'>
+                <div class='add-child-link'>
                     <form method='POST' action='/events/add'>
                         <input type="hidden" name="organization_id" value="<?=$organization->organization_id?>" >
                         <input type="hidden" name="from_organization" value="1" >

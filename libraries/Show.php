@@ -123,7 +123,7 @@ class Show {
     /*-------------------------------------------------------------------------------------------------
     Populates a Show from a database row
     -------------------------------------------------------------------------------------------------*/
-    public function populateFromDb ($db_row) {
+    public function populateFromDb ($db_row, $event = NULL) {
         
         $this->populateFromAssocData ($db_row);
 
@@ -131,11 +131,17 @@ class Show {
         $this->modified = $db_row['modified'];
         $this->user_id = $db_row['user_id'];
 
-        $this->event = new Event();
-        $this->event->populateFromDb ($this->event_id);
+        $this->event = $event;
 
         $this->venue = new Venue();
-        $this->venue->populateFromDb ($this->venue_id);
+        $this->venue->findInDb ($this->venue_id);
+
+        $this->date_time = $db_row['date_time'];
+        $date = DateTime::createFromFormat ("Y-m-d H:i:s", $this->date_time);
+        $day = $date->format("l");
+        $dateString = $date->format("Y-m-d");
+        $timeString = $date->format("H:i:s");
+        $this->formatDateAndTimeStrings ($day, $dateString, $timeString);
     }
     
     /*-------------------------------------------------------------------------------------------------
@@ -144,6 +150,9 @@ class Show {
     public function populateFromPostData ($post_data) {
 
         $this->populateFromAssocData ($post_data);
+
+        $date = DateTime::createFromFormat ("m/d/Y h:i A", $post_data['showdate'].' '.$post_data['showtime']);
+        $this->date_time = $date->format("Y-m-d H:i:s");
     }
 
     /*-------------------------------------------------------------------------------------------------
@@ -172,7 +181,7 @@ class Show {
               FROM shows';
 
         if (isset($condition))
-            $q += " ".$condition;
+            $q = $q." ".$condition;
               
         # Execute the query to get all the shows.
         $rows = DB::instance(DB_NAME)->select_rows($q);
@@ -197,7 +206,7 @@ class Show {
         $_data['created'] = $this->created;
         $_data['modified'] = $this->modified;
         $_data['user_id'] = $this->user_id;
-        $_data['organization_id'] = $this->organization_id;
+        $_data['venue_id'] = $this->venue_id;
         $_data['event_id'] = $this->event_id;
         $_data['date_time'] = $this->date_time;
 

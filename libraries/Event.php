@@ -19,6 +19,7 @@ class Event
     public      $category;
     public      $genre;
     public      $website;
+    public      $purchase_link;
     public      $admission_info;
     public      $shows;         // []
     public      $performers;    // []
@@ -41,11 +42,11 @@ class Event
         $this->category = 0;
         $this->genre = 0;
         $this->website = '';
+        $this->purchase_link = '';
         $this->admission_info = '';
         $this->shows = NULL;
         $this->performers = NULL;        
         $this->image_url = NULL;
-        $this->images = NULL;
         $this->top_pick = false;
 
     }
@@ -74,7 +75,8 @@ class Event
         $this->category = $eventXML->category;
         $this->genre = $eventXML->genre;
         $this->website = $eventXML->website;
-        $this->admission_info = $eventXML->addmissioninfo;
+        $this->purchase_link= $eventXML->purchaselink;
+        $this->admission_info = $eventXML->admissioninfo;
         $this->top_pick = !empty($eventXML->toppick) ? true : false;
 
         $i = 0;
@@ -108,6 +110,7 @@ class Event
     private function populateFromAssocData ($assoc_data) {
 
         $this->event_id = isset($assoc_data['event_id']) ? $assoc_data['event_id'] : 0;
+        $this->organization_id = isset($assoc_data['organization_id']) ? $assoc_data['organization_id'] : 0;
         $this->name = $assoc_data['name'];
         $this->description = $assoc_data['description'];
         $this->website = $assoc_data['website'];
@@ -115,6 +118,7 @@ class Event
  
         $this->category = isset($assoc_data['category']) ? $assoc_data['category'] : 0;
         $this->genre = isset($assoc_data['genre']) ? $assoc_data['genre'] : 0;
+        $this->purchase_link = isset($assoc_data['purchase_link']) ? $assoc_data['purchase_link'] : '';
         $this->admission_info = isset($assoc_data['admission_info']) ? $assoc_data['admission_info'] : '';
         $this->top_pick = isset($assoc_data['top_pick']) ? $assoc_data['top_pick'] : false;   
     }
@@ -122,13 +126,36 @@ class Event
     /*-------------------------------------------------------------------------------------------------
     Populates a Event from a database row
     -------------------------------------------------------------------------------------------------*/
-    public function populateFromDb ($db_row) {
+    public function populateFromDb ($db_row, $organization = NULL) {
 
         $this->populateFromAssocData ($db_row);
 
         $this->created = $db_row['created'];
         $this->modified = $db_row['modified'];
         $this->user_id = $db_row['user_id'];
+
+        if ($organization != NULL)
+            $this->organization = $organization;
+        else if ($this->organization_id != 0) {
+            $this->organization = new Organization();
+            $this->organization->findInDb ($this->organization_id);
+        }
+         
+        if ($this->organization != NULL)   
+            $this->image_url = $this->organization->image_url;
+
+        $this->populateShowsFromDb();
+    }
+
+    /*-------------------------------------------------------------------------------------------------
+    Populates an Event's Shows from the database
+    -------------------------------------------------------------------------------------------------*/
+    public function populateShowsFromDb () {
+
+        if ($this->event_id != 0) {
+            $q = "WHERE event_id = '".$this->event_id."'";
+            $this->shows = Show::arrayFromDb ($q, $this);
+        }
     }
     
     /*-------------------------------------------------------------------------------------------------
@@ -158,7 +185,7 @@ class Event
     /*-------------------------------------------------------------------------------------------------
     Static/Class method to get an array of Event objects
     -------------------------------------------------------------------------------------------------*/
-    public static function arrayFromDb ($condition = NULL) {
+    public static function arrayFromDb ($condition = NULL, $organization = NULL) {
 
         # Build the query to get all the users
         $q = "SELECT * 
@@ -174,7 +201,7 @@ class Event
 
         foreach ($rows as $row) {
             $event = new Event();
-            $event->populateFromDb($row);
+            $event->populateFromDb($row, $organization);
             $events[] = $event;
         }
         
@@ -196,8 +223,8 @@ class Event
         $_data['category'] = $this->category;
         $_data['genre'] = $this->genre;
         $_data['website'] = $this->website;
+        $_data['purchase_link'] = $this->purchase_link;
         $_data['admission_info'] = $this->admission_info;
-        $_data['image_url'] = $this->image_url;
         $_data['top_pick'] = $this->top_pick;
     }
 

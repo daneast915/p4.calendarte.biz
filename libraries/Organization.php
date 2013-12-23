@@ -118,10 +118,16 @@ class Organization {
         $this->created = $db_row['created'];
         $this->modified = $db_row['modified'];
         $this->user_id = $db_row['user_id'];
+    }
 
+    /*-------------------------------------------------------------------------------------------------
+    Populates a Organization's Events from the database
+    -------------------------------------------------------------------------------------------------*/
+    public function populateEventsFromDb () {
+    
         if ($this->organization_id != 0) {
             $q = "WHERE organization_id = '".$this->organization_id."'";
-            $this->events = Event::arrayFromDb ($q);
+            $this->events = Event::arrayFromDb ($q, $this);
         }
     }
     
@@ -159,7 +165,7 @@ class Organization {
               FROM organizations';
 
         if (isset($condition))
-            $q += " ".$condition;
+            $q = $q." ".$condition;
               
         # Execute the query to get all the organizations.
         $rows = DB::instance(DB_NAME)->select_rows($q);

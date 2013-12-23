@@ -19,6 +19,7 @@
 
     <?php include("includes/common-stylescript.php"); ?>
 
+    <!--
     <script src="js/lean-slider/lean-slider.js"></script>
     <link rel="stylesheet" href="js/lean-slider/lean-slider.css" type="text/css" />
 
@@ -31,6 +32,7 @@
             });
         });
     </script>	
+    -->
 </head>
 
 <body 

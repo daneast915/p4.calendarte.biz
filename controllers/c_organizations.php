@@ -69,6 +69,8 @@ class organizations_controller extends base_controller {
 			$this->template->title   = "Organization";	
 			$this->template->body_id = "organizations";
 
+			$organization->populateEventsFromDb();
+
             if (isset($organization->events) && count($organization->events) > 0) {    
 			    # Nest View for Events List
 			    $eventsView = View::instance('v_events_list');

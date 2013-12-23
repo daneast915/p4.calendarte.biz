@@ -140,7 +140,7 @@ class Venue {
               FROM venues';
 
         if (isset($condition))
-            $q += " ".$condition;
+            $q = $q." ".$condition;
               
         # Execute the query to get all the venues.
         $venue_rows = DB::instance(DB_NAME)->select_rows($q);

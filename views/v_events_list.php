@@ -28,10 +28,13 @@
                     <?php endif; ?>                   
                 </ul>
                 
+                <?php if ($event->shows): ?>
                 <table class="show-list">
                     <thead>
                         <tr>
-	                        <th>Date/Time</th>
+	                        <th>Day</th>
+                            <th>Date</th>
+                            <th>Time</th>
 	                        <th>Location</th>
                         </tr>
                     </thead>
@@ -39,7 +42,13 @@
                     <?php foreach ($event->shows as $show): ?>
                         <tr>
                             <td class="date-time">
-                                <?=$show->shortDay?>, <?=$show->shortDate?> @ <?=$show->timeOfDay?>
+                                <?=$show->shortDay?>
+                            </td>
+                            <td class="date-time">
+                                <?=$show->shortDate?>
+                            </td>
+                            <td class="date-time">
+                                <?=$show->timeOfDay?>
                             </td>
                             <td class="location">
                                 <a href="/venues/detail/<?=$show->venue->venue_id?>">
@@ -50,6 +59,7 @@
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php endif; ?>                   
 
                 <hr class="clearme"/>
             </article>

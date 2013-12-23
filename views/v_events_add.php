@@ -12,26 +12,26 @@
 			<br/>
 		<?php endif; ?>
 
-		<input type="hidden" name="organization_id" value="<?=$organization_id?>" >
+		<input type="hidden" name="organization_id" value="<?=$event->organization_id?>" >
 
 		<label for='name'>Name *</label>
 		<input type='text' name='name' id='name' class='textbox' autofocus
-				value='<?=$name?>' />
+				value='<?=$event->name?>' />
 		<br>
 		<label for='description'>Description *</label>
-		<textarea name='description' id='description'><?=$description?></textarea>
+		<textarea name='description' id='description'><?=$event->description?></textarea>
 		<br>
 		<label for='website'>Website</label>
 		<input type='text' name='website' id='website' class='textbox'
-				value='<?=$website?>' />
+				value='<?=$event->website?>' />
 		<br>
 		<label for='purchase_link'>Purchase Link</label>
 		<input type='text' name='purchase_link' id='purchase_link' class='textbox'
-				value='<?=$purchase_link?>' />
+				value='<?=$event->purchase_link?>' />
 		<br>
 		<label for='admission_info'>Admission Information</label>
 		<input type='text' name='admission_info' id='admission_info' class='textbox'
-				value='<?=$admission_info?>' />		
+				value='<?=$event->admission_info?>' />		
 
 		<br>
 	

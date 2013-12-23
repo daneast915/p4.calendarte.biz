@@ -9,6 +9,9 @@
 	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/overcast/jquery-ui.css" type="text/css" media="all" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js" type="text/javascript"></script>
 
+    <link rel="stylesheet" type="text/css" href="/css/jquery.timepicker.css" />
+    <script src="/js/jquery.timepicker.min.js" type="text/javascript"></script>
+
     <script src="/js/iamhere.js" type="text/javascript"></script>
     <script src="/js/jqdatepicker.js" type="text/javascript"></script>
     <script src="/js/dataTables/jquery.dataTables.js" type="text/javascript"></script>

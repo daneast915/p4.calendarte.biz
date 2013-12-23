@@ -19,7 +19,20 @@
             <!-- end breadcrumb navigation -->             
                     
             <!-- Detail -->
+ 
+            <?php if ($canUpdateEvent): ?>
+                <p/>
+                <div class='edit-link'>
+                    <form method='POST' action='/events/edit'>
+                        <input type="hidden" name="event_id" value="<?=$event->event_id?>" >
+                        <input type='submit' value='Edit Event' class='detail-button'/>
+                    </form>
+                </div>
+            <?php endif; ?>
+
             <h2 class="before-detail">Event</h2>
+
+            <hr class="clearme"/>
 
             <section class="detail-section event-detail">
                 <ul>
@@ -33,7 +46,7 @@
 
                     <li class="label">Presented by</li>
                     <li class="organization">
-                        <a href="/organizations/detail/<?=$event->organization->id?>"><?=$event->organization->name?></a>
+                        <a href="/organizations/detail/<?=$event->organization->organization_id?>"><?=$event->organization->name?></a>
                     </li>
 
                     <li class="description"><?=$event->description?></li>
@@ -62,6 +75,7 @@
                     <?php endif; ?>
                 </ul>
 
+                <?php if ($event->shows): ?>
                 <table class="show-list">
                     <thead>
                         <tr>
@@ -85,8 +99,20 @@
                     <?php endforeach; ?>
                     </tbody>
                 </table>
+                <?php endif; ?>
                 
                 <hr class="clearme"/>
             </section>    
+
+            <?php if ($canAddShow): ?>
+                <p/>
+                <div class='add-child-link'>
+                    <form method='POST' action='/events/addshow'>
+                        <input type="hidden" name="event_id" value="<?=$event->event_id?>" >
+                        <input type="hidden" name="from_event" value="1" >
+                        <input type='submit' value='Add Show' class='detail-button'/>
+                    </form>
+                </div>
+            <?php endif; ?>
 
         </div>

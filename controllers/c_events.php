@@ -26,25 +26,16 @@ class events_controller extends base_controller {
 		$this->template->title   = "Events";	
 		$this->template->body_id = "events";
 
-		// Read XML files for events & shows
-	    $eventsXML = getEvents();
-	    $showsXML  = getShows();
-	    $venuesXML = getVenues();
-	    $organizationsXML = getOrganizations();
+		// Read database for events & shows
+		$events = Event::arrayFromDb();
 
-	    // Build list of events
-	    $i = 0;            
-	    foreach ($eventsXML->event as $eventXML) {
-	        $eventInstance = new Event();
-	        $eventInstance->populateFromXML ($eventXML, $organizationsXML);
-	        $eventInstance->populateShowsFromXML ($eventsXML, $organizationsXML, $showsXML, $venuesXML, $eventInstance->organization);
-	        
-	        $results[$i++] = $eventInstance;
-	    }
-	
+		foreach($events as $event) {
+			$event->populateShowsFromDb();
+		}
+
 	    # Nest View for Events List
 	    $eventsView = View::instance('v_events_list');
-	    $eventsView->events = $results;	
+	    $eventsView->events = $events;	
 		$this->template->content->events = $eventsView;
 
 		# Render the View
@@ -60,23 +51,27 @@ class events_controller extends base_controller {
     		Router::redirect("/events/index");
     	}
 
-	    $eventsXML = getEvents();
-	    $organizationsXML = getOrganizations();
-	    $showsXML  = getShows();
-	    $venuesXML = getVenues();
+   		$event = new Event();
+   		$row = $event->findInDb($id);
 
-        $eventXML = findEvent($eventsXML, $id);
+	    if (isset($row)) {
 
-	    if (isset($eventXML)) {
-            
 	 		# Setup the View
 			$this->template->content = View::instance("v_events_detail");
 			$this->template->title   = "Event";	
 			$this->template->body_id = "events";
 
-            $event = new Event();
-            $event->populateFromXML ($eventXML, $organizationsXML);
-            $event->populateShowsFromXML ($eventsXML, $organizationsXML, $showsXML, $venuesXML);
+	   		if ($event->organization_id != 0) {
+	   			$organization = new Organization();
+	   			$organization->findInDb ($event->organization_id);
+	   			$event->organization = $organization;
+	   		}
+
+			$event->populateShowsFromDb();
+
+            $canEdit = ($this->user && $this->user->user_id == $event->user_id);
+            $this->template->content->canUpdateEvent = $canEdit;
+            $this->template->content->canAddShow = $canEdit;
 
 			# Render the View
 		    $this->template->content->event = $event;
@@ -88,6 +83,31 @@ class events_controller extends base_controller {
 	}    
 
  	/*-------------------------------------------------------------------------------------------------
+	Validates $POST data for Add / Edit
+	-------------------------------------------------------------------------------------------------*/
+    private function validateAddEditPostData (&$post_data, &$errorMessage) {
+
+    	$error = false;
+    	
+		# Array for field names
+		$field_names = Array(
+			"name" => "Name",
+			"description" => "Description"
+			);
+		
+		# Loop through the POST data to validate
+		foreach($post_data as $field_name => $value) {
+			# If a field is blank, add a message
+			if ($value == "" && isset($field_names[$field_name])) {
+				$errorMessage .= $field_names[$field_name].' must contain a value.<br/>';
+				$error = true;
+			}
+		}
+
+		return $error;   	
+    }
+
+ 	/*-------------------------------------------------------------------------------------------------
 	events/add controller method
 	-------------------------------------------------------------------------------------------------*/
    	public function add() {
@@ -96,99 +116,261 @@ class events_controller extends base_controller {
     		Router::redirect('/events/index');
 
         # Setup view
-		$this->template->content = View::instance('v_events_add');;	
+		$this->template->content = View::instance('v_events_add');
 		$this->template->title   = "New Event";
 		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
 
         # Render template
-		if (isset($_POST['from_organization'])) {
-			$this->template->content->organization_id = $_POST['organization_id'];
-			$this->template->content->name = '';
-			$this->template->content->description = '';
-			$this->template->content->website = '';
-			$this->template->content->purchase_link = '';
-			$this->template->content->admission_info = '';
+		if (isset($_POST['from_organization']) && isset($_POST['organization_id'])) {
+			$event = new Event();
+			$event->organization_id = $_POST['organization_id'];
+			$this->template->content->event = $event;
 
         	echo $this->template;
 			return;
     	}
+
+		# Transfer POST data to Event object
+		$event = new Event();
+		$event->populateFromPostData ($_POST);
+
+		# Innocent until proven guilty
+		$errorMessage = '';
+		$this->template->content->error = '';
+
+		$error = $this->validateAddEditPostData ($_POST, $errorMessage);
+
+		# If any errors, display the page with the errors
+		if ($error) {
+			$event->email = $_POST['email'];
+
+			$this->template->content->error = $errorMessage;
+			$this->template->content->event = $event;
+			echo $this->template;
+
+			return;
+		}
 		
  		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
-		# Innocent until proven guilty
-		$error = false;
-		$this->template->content->error = '';
-		
-		# Array for field names
-		$field_names = Array(
-			"organization_id" => "Organization",
-			"name" => "Name",
-			"description" => "Description",
-			"website" => "Website",
-			"purchase_link" => "Purchase Link",
-			"admission_info" => "Admission Info"
-			);
-		
-		# Loop through the POST data to validate
-		foreach($_POST as $field_name => $value) {
-			# Sanitize the data
-			$_POST[$field_name] = $this->userObj->cleanse_data ($_POST[$field_name]);
+		# Cleanse the data
+		$_POST = $this->userObj->cleanse_data($_POST);
+    
+		# Insert this event into the database
+		$event->populateFromPostData ($_POST);
+		$event->addToDb ($this->user->user_id);
 
-			# If a field is blank, add a message
-			if ($value == "") {
-				$this->template->content->error .= $field_names[$field_name].' must contain a value.<br/>';
-				$error = true;
-			}
-			
-			# If a field contains invalid characters, add a message
-			/*---
-			if ($this->userObj->check_for_invalid_chars ($value))  {
-				$this->template->content->error .= $field_names[$field_name].' contains invalid characters.<br/>';
-				$_POST[$field_name] = '';
-				$error = true;				
-			}
-			---*/
-		}
+		# Send them to the organizations details screen
+		Router::redirect('/organizations/detail/'.$event->organization_id); 
+    }
+
+ 	/*-------------------------------------------------------------------------------------------------
+	events/edit controller method
+	-------------------------------------------------------------------------------------------------*/
+   	public function edit() {
+
+   		if (!$this->user || !$_POST)
+    		Router::redirect('/events/index');
+
+    	$event_id = $_POST['event_id'];
+
+		# Transfer POST data to Event object
+		$event = new Event();
+		$event->findInDb ($event_id);
+
+        # Setup view
+		$this->template->content = View::instance('v_events_edit');
+		$this->template->title   = "Edit Event";
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
+
+		$this->template->content->event = $event;
+
+    	echo $this->template;
+    }
+
+ 	/*-------------------------------------------------------------------------------------------------
+	events/p_edit controller method
+	-------------------------------------------------------------------------------------------------*/
+   	public function p_edit() {
+
+   		if (!$this->user || !$_POST)
+    		Router::redirect('/events/index');
+
+    	$event_id = $_POST['event_id'];
+
+        # Setup view
+		$this->template->content = View::instance('v_events_edit');
+		$this->template->title   = "Edit Event";
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
+
+		# Transfer POST data to Event object
+		$event = new Event();
+		$event->findInDb ($event_id);
+		$event->populateFromPostData ($_POST);
+
+		# Innocent until proven guilty
+		$errorMessage = '';
+		$this->template->content->error = '';
+
+		$error = $this->validateAddEditPostData ($_POST, $errorMessage);
 
 		# If any errors, display the page with the errors
 		if ($error) {
-			$this->template->content->organization_id = $_POST['organization_id'];
-			$this->template->content->name = $_POST['name'];
-			$this->template->content->description = $_POST['description'];
-			$this->template->content->website = $_POST['website'];
-			$this->template->content->purchase_link = $_POST['purchase_link'];
-			$this->template->content->admission_info = $_POST['admission_info'];
+			$event->email = $_POST['email'];
 
+			$this->template->content->error = $errorMessage;
+			$this->template->content->event = $event;
 			echo $this->template;
+
 			return;
 		}
-	
-		# More data we want stored with the user
-		$_POST['created']  = Time::now();
-		$_POST['modified'] = Time::now();
-    
-		# Insert this event into the database
-		$this->userObj->add_event ($this->user->user_id, $_POST);
+		
+ 		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 
-		# Send them to the login screen
-		Router::redirect('/events/index/1'); 
+		# Cleanse the data
+		$_POST = $this->userObj->cleanse_data($_POST);
+    
+		# Update this event in the database
+		$event->populateFromPostData ($_POST);
+		$event->updateToDb ($this->user->user_id);
+
+		# Send them to the detail screen
+		Router::redirect('/events/detail/'.$event->event_id); 
+		
     }
 	
 	/*-------------------------------------------------------------------------------------------------
-	events/delete controller method
+	organizations/delete controller method
 	-------------------------------------------------------------------------------------------------*/
 	public function delete() {
 
    		if (!$this->user)
     		Router::redirect('/events/index');
-    			
+	
 		# Delete this post
-		$this->userObj->delete_organization ($this->user->user_id, $_POST['event_id']);
-			
-		# Send them back
-		Router::redirect("/events/index/2");	
+		$event = new Event();
+   		$row = $event->findInDb($_POST['event_id']);
+
+   		$error = 0;
+
+	    if (isset($row)) {		
+	    	if ($event->deleteFromDb ($this->user->user_id)) {
+				# Send them to the index
+				Router::redirect("/events/index/2");	
+			}
+			else {
+				$error = 3;
+			}
+		}
+		else {
+			$error = 3;
+		}
+
+		# Send them back to index
+		Router::redirect("/events/index/".$error);
+
 	}
+
+	/*-------------------------------------------------------------------------------------------------
+	Populates an array with Venues for a <select>
+	-------------------------------------------------------------------------------------------------*/
+	private function populateVenueArray() {
+
+		$venues = Venue::arrayFromDb();
+		$venuesArray = array();
+
+		foreach($venues as $venue) {
+			$venuesArray[$venue->venue_id] = $venue->name;
+		}
+
+		return $venuesArray;
+	}
+
+ 	/*-------------------------------------------------------------------------------------------------
+	Validates $POST data for Show Add / Edit
+	-------------------------------------------------------------------------------------------------*/
+    private function validateShowAddEditPostData (&$post_data, &$errorMessage) {
+
+    	$error = false;
+    	
+		# Array for field names
+		$field_names = Array(
+			"venue" => "Venue",
+			"showdate" => "Date",
+			"showtime" => "Time"
+			);
+		
+		# Loop through the POST data to validate
+		foreach($post_data as $field_name => $value) {
+			# If a field is blank, add a message
+			if ($value == "" && isset($field_names[$field_name])) {
+				$errorMessage .= $field_names[$field_name].' must contain a value.<br/>';
+				$error = true;
+			}
+		}
+
+		return $error;   	
+    }
+
+ 	/*-------------------------------------------------------------------------------------------------
+	events/addshow controller method
+	-------------------------------------------------------------------------------------------------*/
+   	public function addshow() {
+
+   		if (!$this->user || !$_POST)
+    		Router::redirect('/events/index');
+
+        # Setup view
+		$this->template->content = View::instance('v_events_addshow');
+		$this->template->title   = "New Show for Event";
+		$this->template->client_files_body = "<script src='/js/hide-category-navigation.js' type='text/javascript'></script>";
+
+		$this->template->content->venues = $this->populateVenueArray();
+
+        # Render template
+		if (isset($_POST['from_event']) && isset($_POST['event_id'])) {
+			$show = new Show();
+			$show->event_id = $_POST['event_id'];
+			$this->template->content->show = $show;
+
+        	echo $this->template;
+			return;
+    	}
+
+		# Transfer POST data to Event object
+		$show = new Show();
+		$show->populateFromPostData ($_POST);
+
+		# Innocent until proven guilty
+		$errorMessage = '';
+		$this->template->content->error = '';
+
+		$error = $this->validateShowAddEditPostData ($_POST, $errorMessage);
+
+		# If any errors, display the page with the errors
+		if ($error) {
+			$this->template->content->error = $errorMessage;
+			$this->template->content->event = $event;
+			echo $this->template;
+
+			return;
+		}
+		
+ 		# Prevent SQL injection attacks by sanitizing the data the user entered in the form
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
+		# Cleanse the data
+		$_POST = $this->userObj->cleanse_data($_POST);
+    
+		# Insert this show into the database
+		$show->populateFromPostData ($_POST);
+		$show->addToDb ($this->user->user_id);
+
+		# Send them to the events details screen
+		Router::redirect('/events/detail/'.$show->event_id); 
+    }
 	
 	/*-------------------------------------------------------------------------------------------------
 	events/search controller method
