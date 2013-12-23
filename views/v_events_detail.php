@@ -76,29 +76,7 @@
                 </ul>
 
                 <?php if ($event->shows): ?>
-                <table class="show-list">
-                    <thead>
-                        <tr>
-                            <th>Date/Time</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                    <?php foreach ($event->shows as $show): ?>
-
-                        <tr>
-                            <td class="date-time">
-                                <?=$show->shortDay?>, <?=$show->shortDate?> - <?=$show->timeOfDay?>
-                            </td>
-                            <td class="location">
-                                <a href="/venues/detail/<?=$show->venue->venue_id?>"><?=$show->venue->name?></a>
-                            </td>
-                        </tr>
-
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                    <?php include("includes/event-show-list.php"); ?>
                 <?php endif; ?>
                 
                 <hr class="clearme"/>
