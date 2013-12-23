@@ -1,7 +1,7 @@
 <?php
 
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
+//ini_set('display_errors', 'On');
+//error_reporting(E_ALL);
 
 require_once 'includes/findinxml.php';
 
@@ -159,10 +159,10 @@ class events_controller extends base_controller {
     
 		# Insert this event into the database
 		$event->populateFromPostData ($_POST);
-		$event->addToDb ($this->user->user_id);
+		$event_id = $event->addToDb ($this->user->user_id);
 
-		# Send them to the organizations details screen
-		Router::redirect('/organizations/detail/'.$event->organization_id); 
+		# Send them to the events details screen
+		Router::redirect('/events/detail/'.$event_id); 
     }
 
  	/*-------------------------------------------------------------------------------------------------
@@ -377,8 +377,67 @@ class events_controller extends base_controller {
 	-------------------------------------------------------------------------------------------------*/
 	public function search() {
 
-    	Router::redirect('/events/index');
+   		if (!$_POST)
+     		Router::redirect('/events/index');
 
+		# Setup the View
+		$this->template->content = View::instance("v_events_index");
+		$this->template->title   = "Events";	
+		$this->template->body_id = "events";
+
+		$q = '';
+
+		# Build the query for the Search of Keyword, Start Date and End Date
+		$q = "SELECT DISTINCT
+				events.*
+			FROM events
+			INNER JOIN organizations
+				ON events.organization_id = organizations.organization_id 
+			INNER JOIN shows
+				ON events.event_id = shows.event_id 
+			INNER JOIN venues
+				ON shows.venue_id = venues.venue_id 
+			WHERE (events.name LIKE '%".$_POST['keyword']."%'
+	        	OR events.description LIKE '%".$_POST['keyword']."%'
+	        	OR organizations.name LIKE '%".$_POST['keyword']."%'
+	        	OR venues.name LIKE '%".$_POST['keyword']."%'
+	        	OR venues.address_city LIKE '%".$_POST['keyword']."%')";
+
+		if (!empty($_POST['startdate'])) {
+	        $date = DateTime::createFromFormat ("m/d/Y", $_POST['startdate']);
+	        $date_time = $date->format("Y-m-d H:i:s");
+			$q = $q." AND (shows.date_time > STR_TO_DATE('".$date_time."', '%Y-%m-%d %H:%i:%s'))";
+		}
+
+		if (!empty($_POST['enddate'])) {
+	        $date = DateTime::createFromFormat ("m/d/Y", $_POST['enddate']);
+	        $date->modify('+1 day');
+	        $date_time = $date->format("Y-m-d H:i:s");
+			$q = $q." AND (shows.date_time < STR_TO_DATE('".$date_time."', '%Y-%m-%d %H:%i:%s'))";
+		}
+
+		# Run the query
+		$rows = DB::instance(DB_NAME)->select_rows($q);
+		
+        $events = array();
+
+        foreach ($rows as $row) {
+            $event = new Event();
+            $event->populateFromDb($row);
+            $events[] = $event;
+        }
+
+		foreach($events as $event) {
+			$event->populateShowsFromDb();
+		}
+
+	    # Nest View for Events List
+	    $eventsView = View::instance('v_events_list');
+	    $eventsView->events = $events;	
+		$this->template->content->events = $eventsView;
+
+		# Render the View
+		echo $this->template;	
 	}
 
 } # end of the class

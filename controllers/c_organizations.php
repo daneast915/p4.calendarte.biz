@@ -30,7 +30,7 @@ class organizations_controller extends base_controller {
 		if (isset($param)) {
 			switch ($param) {
 				case 1:
-					$this->template->content->message = "Your new organization was added.<br/>";
+					$this->template->content->message = "Your organization was added.<br/>";
 					break;
 				case 2:
 					$this->template->content->message = "Your organization was deleted.<br/>";

@@ -162,7 +162,8 @@ class Organization {
 
         # Build the query to get all the users
         $q = 'SELECT * 
-              FROM organizations';
+              FROM organizations
+              ORDER BY name';
 
         if (isset($condition))
             $q = $q." ".$condition;

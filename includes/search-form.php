@@ -1,6 +1,6 @@
     <section class="nav-search-form">
 		<h2>Find an Event</h2>
-        <form action="/events/search/" class="search-form">
+        <form method='POST' action="/events/search/" class="search-form">
 		    <ul class="search-table" >
 			    <li class="table-label">Keyword, organization or venue:</li>
 			    <li><input type="text" size="30" name="keyword" id="keyword" /></li>

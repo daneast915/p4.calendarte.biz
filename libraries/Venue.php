@@ -1,7 +1,7 @@
 <?php
 
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
+//ini_set('display_errors', 'On');
+//error_reporting(E_ALL | E_STRICT);
 
 require_once 'includes/dateformats.php';
 require_once 'includes/findinxml.php';
@@ -137,7 +137,8 @@ class Venue {
 
         # Build the query to get all the users
         $q = 'SELECT * 
-              FROM venues';
+              FROM venues
+              ORDER BY name';
 
         if (isset($condition))
             $q = $q." ".$condition;
